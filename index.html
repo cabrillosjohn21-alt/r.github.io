@@ -1,769 +1,318 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>
-        Smart Fertigation Dashboard
-    </title>
+    <title>Smart Fertigation Dashboard</title>
 
-    <link rel="stylesheet"
-          href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-    <script src=
-    "https://cdn.jsdelivr.net/npm/chart.js">
-    </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
 
-        <h2>
-            🌱 Smart Farm
-        </h2>
+        <h2>🌱 Smart Farm</h2>
 
         <nav>
             <ul>
-                <li>
-                    <a href="#dashboard">
-                        Dashboard
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#water">
-                        Water System
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#fertigation">
-                        Fertigation
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#cropManager">
-                        Crop Presets
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#environment">
-                        Environment
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#energy">
-                        Energy
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#controls">
-                        Manual Controls
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#alerts">
-                        Alerts
-                    </a>
-                </li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#water">Water System</a></li>
+                <li><a href="#fertigation">Fertigation</a></li>
+                <li><a href="#cropManager">Crop Presets</a></li>
+                <li><a href="#environment">Environment</a></li>
+                <li><a href="#energy">Energy</a></li>
+                <li><a href="#controls">Manual Controls</a></li>
+                <li><a href="#alerts">Alerts</a></li>
             </ul>
         </nav>
 
         <div class="system-status">
-
-            <h3>
-                System State
-            </h3>
-
-            <span id="systemState"
-                  class="status active">
-
-                ACTIVE
-
-            </span>
-
+            <h3>System State</h3>
+            <span id="systemState" class="status active">ACTIVE</span>
         </div>
 
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="main-content">
 
-        <!-- HEADER -->
         <header class="topbar">
 
-            <h1>
-                Smart Fertigation
-                Monitoring System
-            </h1>
+            <h1>Smart Fertigation Monitoring System</h1>
 
-            <div class=
-                 "connection-status">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <button id="theme-toggle" style="padding: 10px 15px; font-size: 0.9rem; border-radius: 10px;">
+                    🌙 Mode
+                </button>
 
-                <span class=
-                      "online-dot">
-                </span>
-
-                ESP32 Connected
-
+                <div class="connection-status">
+                    <span class="online-dot"></span>
+                    ESP32 Connected
+                </div>
             </div>
 
         </header>
 
-        <!-- DASHBOARD -->
         <section id="dashboard">
 
-            <h2>
-                Dashboard Overview
-            </h2>
+            <h2>Dashboard Overview</h2>
 
-            <div class=
-                 "card-grid">
-
-                <div class="card">
-                    <h3>
-                        Reservoir Tank
-                    </h3>
-
-                    <p id=
-                       "reservoirLevel">
-
-                       0%
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Mixing Tank
-                    </h3>
-
-                    <p id=
-                       "mixingLevel">
-
-                       0%
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Temperature
-                    </h3>
-
-                    <p id=
-                       "temperature">
-
-                       0°C
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Humidity
-                    </h3>
-
-                    <p id=
-                       "humidity">
-
-                       0%
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Battery
-                    </h3>
-
-                    <p id=
-                       "batteryLevel">
-
-                       0%
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Power Source
-                    </h3>
-
-                    <p id=
-                       "powerSource">
-
-                       Solar
-
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- WATER SYSTEM -->
-        <section id="water">
-
-            <h2>
-                🌊 Water System
-            </h2>
-
-            <div class=
-                 "card-grid">
-
-                <div class="card">
-
-                    <h3>
-                        Transfer Pump
-                    </h3>
-
-                    <span id=
-                          "transferPumpStatus"
-                          class=
-                          "device-status off">
-
-                        OFF
-
-                    </span>
-
-                </div>
-
-                <div class="card">
-
-                    <h3>
-                        Booster Pump
-                    </h3>
-
-                    <span id=
-                          "boosterPumpStatus"
-                          class=
-                          "device-status off">
-
-                        OFF
-
-                    </span>
-
-                </div>
-
-                <div class="card">
-
-                    <h3>
-                        Flow Rate
-                    </h3>
-
-                    <p id=
-                       "flowRate">
-
-                       0 L/min
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- FERTIGATION -->
-        <section id="fertigation">
-
-            <h2>
-                🌱 Fertigation
-            </h2>
-
-            <div class=
-                 "card-grid">
-
-                <div class="card">
-                    <h3>
-                        Nitrogen (N)
-                    </h3>
-
-                    <p id=
-                       "nitrogen">
-
-                       0 ppm
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Phosphorus (P)
-                    </h3>
-
-                    <p id=
-                       "phosphorus">
-
-                       0 ppm
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        Potassium (K)
-                    </h3>
-
-                    <p id=
-                       "potassium">
-
-                       0 ppm
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        pH Level
-                    </h3>
-
-                    <p id=
-                       "phLevel">
-
-                       0
-
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        EC
-                    </h3>
-
-                    <p id=
-                       "ecLevel">
-
-                       0 mS/cm
-
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- CROP PRESET MANAGER -->
-        <section id=
-                 "cropManager">
-
-            <h2>
-                🌾 Crop Preset Manager
-            </h2>
-
-            <div class=
-                 "card-grid">
-
-                <div class=
-                     "card">
-
-                    <h3>
-                        Select Crop
-                    </h3>
-
-                    <select
-                        id=
-                        "cropSelect">
-
-                        <option value="">
-                            Select Crop
-                        </option>
-
-                        <option value=
-                                "tomato">
-                            Tomato
-                        </option>
-
-                        <option value=
-                                "lettuce">
-                            Lettuce
-                        </option>
-
-                        <option value=
-                                "spinach">
-                            Spinach
-                        </option>
-
-                        <option value=
-                                "eggplant">
-                            Eggplant
-                        </option>
-
-                        <option value=
-                                "cucumber">
-                            Cucumber
-                        </option>
-
-                        <option value=
-                                "custom">
-                            Custom Crop
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <div class=
-                     "card">
-
-                    <h3>
-                        Growth Stage
-                    </h3>
-
-                    <select
-                        id=
-                        "growthStage">
-
-                        <option value=
-                                "seedling">
-                            Seedling
-                        </option>
-
-                        <option value=
-                                "vegetative">
-                            Vegetative
-                        </option>
-
-                        <option value=
-                                "flowering">
-                            Flowering
-                        </option>
-
-                        <option value=
-                                "fruiting">
-                            Fruiting
-                        </option>
-
-                    </select>
-
-                </div>
-            <!-- TARGET VALUES -->
             <div class="card-grid">
 
                 <div class="card">
-                    <h3>
-                        Target Nitrogen
-                    </h3>
-
-                    <p id="targetN">
-                        0 ppm
-                    </p>
+                    <h3>Reservoir Tank</h3>
+                    <p id="reservoirLevel">0%</p>
                 </div>
 
                 <div class="card">
-                    <h3>
-                        Target Phosphorus
-                    </h3>
-
-                    <p id="targetP">
-                        0 ppm
-                    </p>
+                    <h3>Mixing Tank</h3>
+                    <p id="mixingLevel">0%</p>
                 </div>
 
                 <div class="card">
-                    <h3>
-                        Target Potassium
-                    </h3>
-
-                    <p id="targetK">
-                        0 ppm
-                    </p>
+                    <h3>Temperature</h3>
+                    <p id="temperature">0°C</p>
                 </div>
 
                 <div class="card">
-                    <h3>
-                        Target pH
-                    </h3>
-
-                    <p id="targetPH">
-                        0
-                    </p>
+                    <h3>Humidity</h3>
+                    <p id="humidity">0%</p>
                 </div>
 
                 <div class="card">
-                    <h3>
-                        Target EC
-                    </h3>
-
-                    <p id="targetEC">
-                        0
-                    </p>
+                    <h3>Battery</h3>
+                    <p id="batteryLevel">0%</p>
                 </div>
 
                 <div class="card">
-                    <h3>
-                        Moisture Target
-                    </h3>
-
-                    <p id=
-                       "targetMoisture">
-
-                        0%
-
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- SMART RECOMMENDATION -->
-            <div class="card">
-
-                <h3>
-                    Smart Recommendation
-                </h3>
-
-                <div id=
-                     "recommendationBox">
-
-                    Select a crop
-                    to view nutrient
-                    recommendations
-
+                    <h3>Power Source</h3>
+                    <p id="powerSource">Solar</p>
                 </div>
 
             </div>
 
         </section>
 
-        <!-- ENVIRONMENT -->
+        <section id="water">
+
+            <h2>🌊 Water System</h2>
+
+            <div class="card-grid">
+
+                <div class="card">
+                    <h3>Transfer Pump</h3>
+                    <span id="transferPumpStatus" class="device-status off">OFF</span>
+                </div>
+
+                <div class="card">
+                    <h3>Booster Pump</h3>
+                    <span id="boosterPumpStatus" class="device-status off">OFF</span>
+                </div>
+
+                <div class="card">
+                    <h3>Flow Rate</h3>
+                    <p id="flowRate">0 L/min</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="fertigation">
+
+            <h2>🌱 Fertigation</h2>
+
+            <div class="card-grid">
+
+                <div class="card">
+                    <h3>Nitrogen (N)</h3>
+                    <p id="nitrogen">0 ppm</p>
+                </div>
+
+                <div class="card">
+                    <h3>Phosphorus (P)</h3>
+                    <p id="phosphorus">0 ppm</p>
+                </div>
+
+                <div class="card">
+                    <h3>Potassium (K)</h3>
+                    <p id="potassium">0 ppm</p>
+                </div>
+
+                <div class="card">
+                    <h3>pH Level</h3>
+                    <p id="phLevel">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>EC</h3>
+                    <p id="ecLevel">0 mS/cm</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="cropManager">
+
+            <h2>🌾 Crop Preset Manager</h2>
+
+            <div class="card-grid">
+
+                <div class="card">
+                    <h3>Select Crop</h3>
+                    <select id="cropSelect">
+                        <option value="">Select Crop</option>
+                        <option value="tomato">Tomato</option>
+                        <option value="lettuce">Lettuce</option>
+                        <option value="spinach">Spinach</option>
+                        <option value="eggplant">Eggplant</option>
+                        <option value="cucumber">Cucumber</option>
+                        <option value="custom">Custom Crop</option>
+                    </select>
+                </div>
+
+                <div class="card">
+                    <h3>Growth Stage</h3>
+                    <select id="growthStage">
+                        <option value="seedling">Seedling</option>
+                        <option value="vegetative">Vegetative</option>
+                        <option value="flowering">Flowering</option>
+                        <option value="fruiting">Fruiting</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="card-grid">
+
+                <div class="card">
+                    <h3>Target Nitrogen</h3>
+                    <p id="targetN">0 ppm</p>
+                </div>
+
+                <div class="card">
+                    <h3>Target Phosphorus</h3>
+                    <p id="targetP">0 ppm</p>
+                </div>
+
+                <div class="card">
+                    <h3>Target Potassium</h3>
+                    <p id="targetK">0 ppm</p>
+                </div>
+
+                <div class="card">
+                    <h3>Target pH</h3>
+                    <p id="targetPH">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Target EC</h3>
+                    <p id="targetEC">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Moisture Target</h3>
+                    <p id="targetMoisture">0%</p>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <h3>Smart Recommendation</h3>
+                <div id="recommendationBox">
+                    Select a crop to view nutrient recommendations
+                </div>
+            </div>
+
+        </section>
+
         <section id="environment">
 
-            <h2>
-                🌤 Environment
-            </h2>
+            <h2>🌤 Environment</h2>
 
-            <div class=
-                 "card-grid">
+            <div class="card-grid">
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Soil Moisture A
-                    </h3>
-
-                    <p id=
-                       "soilA">
-
-                        0%
-
-                    </p>
-
+                <div class="card">
+                    <h3>Soil Moisture A</h3>
+                    <p id="soilA">0%</p>
                 </div>
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Soil Moisture B
-                    </h3>
-
-                    <p id=
-                       "soilB">
-
-                        0%
-
-                    </p>
-
+                <div class="card">
+                    <h3>Soil Moisture B</h3>
+                    <p id="soilB">0%</p>
                 </div>
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Soil Moisture C
-                    </h3>
-
-                    <p id=
-                       "soilC">
-
-                        0%
-
-                    </p>
-
+                <div class="card">
+                    <h3>Soil Moisture C</h3>
+                    <p id="soilC">0%</p>
                 </div>
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Light Intensity
-                    </h3>
-
-                    <p id=
-                       "lightLevel">
-
-                        0 lux
-
-                    </p>
-
+                <div class="card">
+                    <h3>Light Intensity</h3>
+                    <p id="lightLevel">0 lux</p>
                 </div>
 
             </div>
 
         </section>
 
-        <!-- ENERGY -->
         <section id="energy">
 
-            <h2>
-                ⚡ Energy Monitoring
-            </h2>
+            <h2>⚡ Energy Monitoring</h2>
 
-            <div class=
-                 "card-grid">
+            <div class="card-grid">
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Voltage
-                    </h3>
-
-                    <p id=
-                       "voltage">
-
-                        0V
-
-                    </p>
-
+                <div class="card">
+                    <h3>Voltage</h3>
+                    <p id="voltage">0V</p>
                 </div>
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Current
-                    </h3>
-
-                    <p id=
-                       "current">
-
-                        0A
-
-                    </p>
-
+                <div class="card">
+                    <h3>Current</h3>
+                    <p id="current">0A</p>
                 </div>
 
-                <div class=
-                     "card">
-
-                    <h3>
-                        Power Draw
-                    </h3>
-
-                    <p id=
-                       "powerDraw">
-
-                        0W
-
-                    </p>
-
+                <div class="card">
+                    <h3>Power Draw</h3>
+                    <p id="powerDraw">0W</p>
                 </div>
 
             </div>
 
         </section>
 
-        <!-- MANUAL CONTROLS -->
         <section id="controls">
 
-            <h2>
-                🎛 Manual Controls
-            </h2>
+            <h2>🎛 Manual Controls</h2>
 
-            <div class=
-                 "control-grid">
-
-                <button id=
-                        "transferPumpBtn">
-
-                    Transfer Pump
-
-                </button>
-
-                <button id=
-                        "boosterPumpBtn">
-
-                    Booster Pump
-
-                </button>
-
-                <button id=
-                        "nutrientPumpBtn">
-
-                    Nutrient Pump
-
-                </button>
-
-                <button id=
-                        "valveBtn">
-
-                    Solenoid Valve
-
-                </button>
-
-                <button id=
-                        "mixerBtn">
-
-                    Mixer Motor
-
-                </button>
-
-                <button
-                    class="danger"
-                    id=
-                    "emergencyStop">
-
-                    EMERGENCY STOP
-
-                </button>
-
+            <div class="control-grid">
+                <button id="transferPumpBtn">Transfer Pump</button>
+                <button id="boosterPumpBtn">Booster Pump</button>
+                <button id="nutrientPumpBtn">Nutrient Pump</button>
+                <button id="valveBtn">Solenoid Valve</button>
+                <button id="mixerBtn">Mixer Motor</button>
+                <button class="danger" id="emergencyStop">EMERGENCY STOP</button>
             </div>
 
         </section>
 
-        <!-- ALERTS -->
-        <section id=
-                 "alerts">
+        <section id="alerts">
 
-            <h2>
-                🚨 Alerts
-            </h2>
+            <h2>🚨 Alerts</h2>
 
-            <div class=
-                 "alert-box"
-                 id=
-                 "alertContainer">
-
+            <div class="alert-box" id="alertContainer">
                 No Alerts
-
             </div>
 
         </section>
 
     </main>
 
-    <script src=
-            "script.js">
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
-```
-
-            </div>
-```
