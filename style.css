@@ -283,7 +283,6 @@ button.danger:hover {
     color: white;
 }
 
-/* Specific Style for the Theme Switcher Button */
 #theme-toggle {
     font-weight: bold;
     border: 1px solid var(--border-color);
@@ -292,6 +291,12 @@ button.danger:hover {
 /* ======================
    DROPDOWNS & INPUTS
    ====================== */
+label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: bold;
+}
+
 select {
     width: 100%;
     padding: 14px;
@@ -320,6 +325,7 @@ select option {
     border-radius: 16px;
     padding: 20px;
     color: var(--text-main);
+    line-height: 1.5;
 }
 
 /* ======================
