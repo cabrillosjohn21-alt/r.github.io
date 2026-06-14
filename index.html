@@ -93,19 +93,58 @@
                     </div>
                 </div>
 
-                <div class="section-label">📈 Target Presets Matrix:</div>
-                <div class="card-grid target-grid">
-                    <div class="card"><h3>Target N</h3><p id="targetNA">--</p></div>
-                    <div class="card"><h3>Target P</h3><p id="targetPA">--</p></div>
-                    <div class="card"><h3>Target K</h3><p id="targetKA">--</p></div>
-                    <div class="card"><h3>Target pH</h3><p id="targetPHA" style="color: var(--success);">--</p></div>
-                    <div class="card"><h3>Target EC</h3><p id="targetECA" style="color: var(--warning);">--</p></div>
-                    <div class="card"><h3>Target Moisture</h3><p id="targetMoistureA" style="color: var(--text-main);">--</p></div>
+                <div class="section-label">📊 Telemetry vs Target Presets Matrix:</div>
+                <div class="card-grid matrix-grid">
+                    <div class="card matrix-card">
+                        <h3>Nitrogen (N)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="nitrogenA">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetNA" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Phosphorus (P)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="phosphorusA">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetPA" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Potassium (K)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="potassiumA">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetKA" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Soil pH</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilPHA" style="color: var(--success);">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetPHA" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Soil EC</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilECA" style="color: var(--warning);">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetECA" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Moisture</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilA">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetMoistureA" class="target-val">--</p></div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="live-telemetry-text">
-                    <b>Live Node Telemetry:</b> Moisture: <span id="soilA">--</span> | N: <span id="nitrogenA">--</span> | P: <span id="phosphorusA">--</span> | K: <span id="potassiumA">--</span>
-                </div>
                 <div id="recommendationBoxA" class="alert-box">Synchronizing Profile...</div>
             </div>
 
@@ -134,20 +173,59 @@
                     </div>
                 </div>
 
-                <div class="section-label">📈 Target Presets Matrix:</div>
-                <div class="card-grid target-grid">
-                    <div class="card"><h3>Target N</h3><p id="targetNB">--</p></div>
-                    <div class="card"><h3>Target P</h3><p id="targetPB">--</p></div>
-                    <div class="card"><h3>Target K</h3><p id="targetKB">--</p></div>
-                    <div class="card"><h3>Target pH</h3><p id="targetPHB" style="color: var(--success);">--</p></div>
-                    <div class="card"><h3>Target EC</h3><p id="targetECB" style="color: var(--warning);">--</p></div>
-                    <div class="card"><h3>Target Moisture</h3><p id="targetMoistureB" style="color: var(--text-main);">--</p></div>
+                <div class="section-label">📊 Telemetry vs Target Presets Matrix:</div>
+                <div class="card-grid matrix-grid">
+                    <div class="card matrix-card">
+                        <h3>Nitrogen (N)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="nitrogenB">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetNB" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Phosphorus (P)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="phosphorusB">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetPB" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Potassium (K)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="potassiumB">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetKB" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Soil pH</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilPHB" style="color: var(--success);">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetPHB" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Soil EC</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilECB" style="color: var(--warning);">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetECB" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Moisture</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilB">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetMoistureB" class="target-val">--</p></div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="live-telemetry-text">
-                    <b>Live Node Telemetry:</b> Moisture: <span id="soilB">--</span> | N: <span id="nitrogenB">--</span> | P: <span id="phosphorusB">--</span> | K: <span id="potassiumB">--</span>
-                </div>
-                <div id="recommendationBoxB" class="alert-box" style="border-left-color: var(--success)">Synchronizing Profile...</div>
+                <div id="recommendationBoxB" class="alert-box">Synchronizing Profile...</div>
             </div>
 
             <div class="zone-block zone-c">
@@ -175,20 +253,59 @@
                     </div>
                 </div>
 
-                <div class="section-label">📈 Target Presets Matrix:</div>
-                <div class="card-grid target-grid">
-                    <div class="card"><h3>Target N</h3><p id="targetNC">--</p></div>
-                    <div class="card"><h3>Target P</h3><p id="targetPC">--</p></div>
-                    <div class="card"><h3>Target K</h3><p id="targetKC">--</p></div>
-                    <div class="card"><h3>Target pH</h3><p id="targetPHC" style="color: var(--success);">--</p></div>
-                    <div class="card"><h3>Target EC</h3><p id="targetECC" style="color: var(--warning);">--</p></div>
-                    <div class="card"><h3>Target Moisture</h3><p id="targetMoistureC" style="color: var(--text-main);">--</p></div>
+                <div class="section-label">📊 Telemetry vs Target Presets Matrix:</div>
+                <div class="card-grid matrix-grid">
+                    <div class="card matrix-card">
+                        <h3>Nitrogen (N)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="nitrogenC">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetNC" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Phosphorus (P)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="phosphorusC">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetPC" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Potassium (K)</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="potassiumC">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetKC" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Soil pH</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilPHC" style="color: var(--success);">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetPHC" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Soil EC</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilECC" style="color: var(--warning);">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetECC" class="target-val">--</p></div>
+                        </div>
+                    </div>
+                    <div class="card matrix-card">
+                        <h3>Moisture</h3>
+                        <div class="comparison-values">
+                            <div><span class="val-label">LIVE</span><p id="soilC">--</p></div>
+                            <div class="divider-line"></div>
+                            <div><span class="val-label">TARGET</span><p id="targetMoistureC" class="target-val">--</p></div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="live-telemetry-text">
-                    <b>Live Node Telemetry:</b> Moisture: <span id="soilC">--</span> | N: <span id="nitrogenC">--</span> | P: <span id="phosphorusC">--</span> | K: <span id="potassiumC">--</span>
-                </div>
-                <div id="recommendationBoxC" class="alert-box" style="border-left-color: var(--warning)">Synchronizing Profile...</div>
+                <div id="recommendationBoxC" class="alert-box">Synchronizing Profile...</div>
             </div>
         </section>
 
