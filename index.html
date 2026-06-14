@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydroponics & Soil Automation Dashboard</title>
+    <title>Multi-Zone Precision Agricultural Matrix</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>HydroGrow</h2>
+        <h2>HydroGrow Pro</h2>
         <ul>
-            <li><a href="#dashboard">📊 Dashboard</a></li>
-            <li><a href="#presets">🌱 Crop Presets</a></li>
-            <li><a href="#controls">🎛️ Hardware Controls</a></li>
+            <li><a href="#dashboard">📊 System Telemetry</a></li>
+            <li><a href="#zone-management">🌱 Zone Management</a></li>
+            <li><a href="#controls">🎛️ Actuator Diagnostics</a></li>
         </ul>
         
         <div class="system-status">
@@ -31,7 +31,7 @@
     <div class="main-content">
         
         <div class="topbar">
-            <h1>Hydroponics Matrix</h1>
+            <h1>Precision Agronomy Node</h1>
             <div style="display: flex; align-items: center; gap: 15px;">
                 <button id="theme-toggle">☀️ Light</button>
                 <div class="connection-status">
@@ -42,7 +42,7 @@
         </div>
 
         <section id="dashboard">
-            <h2>Live Telemetry Summary</h2>
+            <h2>Shared Ambient Parameters & Infrastructure</h2>
             <div class="card-grid">
                 <div class="card"><h3>Reservoir Level</h3><p id="reservoirLevel">--</p></div>
                 <div class="card"><h3>Mixing Tank Level</h3><p id="mixingLevel">--</p></div>
@@ -51,102 +51,146 @@
                 <div class="card"><h3>Ambient Humidity</h3><p id="humidity">--</p></div>
                 <div class="card"><h3>Luminous Intensity</h3><p id="lightLevel">--</p></div>
             </div>
-
             <div class="card-grid">
-                <div class="card"><h3>System pH Balance</h3><p id="phLevel">--</p></div>
-                <div class="card"><h3>System EC Value</h3><p id="ecLevel">--</p></div>
-            </div>
-
-            <h3>📍 SOIL ZONE A (Node 01 Telemetry)</h3>
-            <div class="card-grid">
-                <div class="card" style="border-left: 4px solid #3b82f6;"><h3>Zone A Moisture</h3><p id="soilA">--</p></div>
-                <div class="card"><h3>Zone A - Nitrogen (N)</h3><p id="nitrogenA">--</p></div>
-                <div class="card"><h3>Zone A - Phosphorus (P)</h3><p id="phosphorusA">--</p></div>
-                <div class="card"><h3>Zone A - Potassium (K)</h3><p id="potassiumA">--</p></div>
-            </div>
-
-            <h3>📍 SOIL ZONE B (Node 02 Telemetry)</h3>
-            <div class="card-grid">
-                <div class="card" style="border-left: 4px solid #10b981;"><h3>Zone B Moisture</h3><p id="soilB">--</p></div>
-                <div class="card"><h3>Zone B - Nitrogen (N)</h3><p id="nitrogenB">--</p></div>
-                <div class="card"><h3>Zone B - Phosphorus (P)</h3><p id="phosphorusB">--</p></div>
-                <div class="card"><h3>Zone B - Potassium (K)</h3><p id="potassiumB">--</p></div>
-            </div>
-
-            <h3>📍 SOIL ZONE C (Node 03 Telemetry)</h3>
-            <div class="card-grid">
-                <div class="card" style="border-left: 4px solid #f59e0b;"><h3>Zone C Moisture</h3><p id="soilC">--</p></div>
-                <div class="card"><h3>Zone C - Nitrogen (N)</h3><p id="nitrogenC">--</p></div>
-                <div class="card"><h3>Zone C - Phosphorus (P)</h3><p id="phosphorusC">--</p></div>
-                <div class="card"><h3>Zone C - Potassium (K)</h3><p id="potassiumC">--</p></div>
-            </div>
-
-            <h3>🔋 Electrical Power Subsystem</h3>
-            <div class="card-grid">
+                <div class="card"><h3>Water Supply pH</h3><p id="phLevel">--</p></div>
+                <div class="card"><h3>Water Supply EC</h3><p id="ecLevel">--</p></div>
                 <div class="card"><h3>Battery Charge</h3><p id="batteryLevel">--</p></div>
                 <div class="card"><h3>Bus Voltage</h3><p id="voltage">--</p></div>
-                <div class="card"><h3>Amperage Draw</h3><p id="current">--</p></div>
-                <div class="card"><h3>Power Draw</h3><p id="powerDraw">--</p></div>
-                <div class="card"><h3>Active Power Supply</h3><p id="powerSource">--</p></div>
+                <div class="card"><h3>Power Source</h3><p id="powerSource">--</p></div>
             </div>
         </section>
 
-        <section id="presets">
-            <h2>Crop Target Overrides</h2>
-            <div class="control-grid">
-                <div>
-                    <label for="cropSelect">Select Philippine Crop Preset:</label>
-                    <select id="cropSelect">
-                        <option value="pechay">Pechay (Native Cabbage)</option>
-                        <option value="kangkong">Kangkong (Water Spinach)</option>
-                        <option value="sitaw">Sitaw (String Beans)</option>
-                        <option value="talong">Talong (Eggplant)</option>
-                        <option value="silinglabuyo">Siling Labuyo (Chili Pepper)</option>
-                        <option value="kamatis">Kamatis (Tomato)</option>
-                        <option value="ampalaya">Ampalaya (Bitter Gourd)</option>
-                        <option value="kalamansi">Kalamansi (Philippine Lime)</option>
-                        <option value="strawberry">Strawberry (Benguet Variety)</option>
-                        <option value="basil">Basil (Local Cultivar)</option>
-                    </select>
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 40px;">
+
+        <section id="zone-management">
+            <h2>Independent Soil Zone Management Arrays</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem;">
+                Select different crops and growth stages for each physical area to instantly match live sensor readings with calibrated targets.
+            </p>
+
+            <div class="zone-block" style="border-left: 5px solid var(--accent-color); background: var(--bg-secondary); padding: 25px; border-radius: 0 12px 12px 0; margin-bottom: 35px; box-shadow: var(--card-shadow);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: var(--accent-color); font-size: 1.2rem;">📍 SOIL ZONE A (Precise Node 01)</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <div>
+                            <select id="cropSelectA" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                                <option value="pechay">Pechay (Native Cabbage)</option>
+                                <option value="kangkong">Kangkong (Water Spinach)</option>
+                                <option value="sitaw">Sitaw (String Beans)</option>
+                                <option value="talong" selected>Talong (Eggplant)</option>
+                                <option value="silinglabuyo">Siling Labuyo (Chili)</option>
+                                <option value="kamatis">Kamatis (Tomato)</option>
+                                <option value="ampalaya">Ampalaya (Bitter Gourd)</option>
+                                <option value="kalamansi">Kalamansi (Philippine Lime)</option>
+                                <option value="strawberry">Strawberry (Benguet Variety)</option>
+                                <option value="basil">Basil (Local Cultivar)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="growthStageA" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                                <option value="seedling">Seedling</option>
+                                <option value="vegetative" selected>Vegetative</option>
+                                <option value="flowering">Flowering</option>
+                                <option value="fruiting">Fruiting</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="growthStage">Growth Stage:</label>
-                    <select id="growthStage">
-                        <option value="seedling">Seedling</option>
-                        <option value="vegetative">Vegetative</option>
-                        <option value="flowering">Flowering</option>
-                        <option value="fruiting">Fruiting</option>
-                    </select>
+
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+                    <div class="card" style="background: var(--bg-primary);"><h3>Moisture (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="soilA">--</span> / <span id="targetMoistureA" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Nitrogen (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="nitrogenA" style="color: var(--text-main);">--</span> / <span id="targetNA" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Phosphorus (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="phosphorusA" style="color: var(--text-main);">--</span> / <span id="targetPA" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Potassium (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="potassiumA" style="color: var(--text-main);">--</span> / <span id="targetKA" style="color: var(--text-muted);">--</span></p></div>
                 </div>
+                <div id="recommendationBoxA" class="alert-box" style="margin-top: 15px; font-size: 0.85rem; padding: 12px 20px;">Synchronizing Profile...</div>
             </div>
 
-            <div class="card-grid">
-                <div class="card"><h3>Target N</h3><p id="targetN">--</p></div>
-                <div class="card"><h3>Target P</h3><p id="targetP">--</p></div>
-                <div class="card"><h3>Target K</h3><p id="targetK">--</p></div>
-                <div class="card"><h3>Target pH</h3><p id="targetPH">--</p></div>
-                <div class="card"><h3>Target EC</h3><p id="targetEC">--</p></div>
-                <div class="card"><h3>Target Moisture</h3><p id="targetMoisture">--</p></div>
+            <div class="zone-block" style="border-left: 5px solid var(--success); background: var(--bg-secondary); padding: 25px; border-radius: 0 12px 12px 0; margin-bottom: 35px; box-shadow: var(--card-shadow);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: var(--success); font-size: 1.2rem;">📍 SOIL ZONE B (Precise Node 02)</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <div>
+                            <select id="cropSelectB" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                                <option value="pechay" selected>Pechay (Native Cabbage)</option>
+                                <option value="kangkong">Kangkong (Water Spinach)</option>
+                                <option value="sitaw">Sitaw (String Beans)</option>
+                                <option value="talong">Talong (Eggplant)</option>
+                                <option value="silinglabuyo">Siling Labuyo (Chili)</option>
+                                <option value="kamatis">Kamatis (Tomato)</option>
+                                <option value="ampalaya">Ampalaya (Bitter Gourd)</option>
+                                <option value="kalamansi">Kalamansi (Philippine Lime)</option>
+                                <option value="strawberry">Strawberry (Benguet Variety)</option>
+                                <option value="basil">Basil (Local Cultivar)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="growthStageB" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                                <option value="seedling">Seedling</option>
+                                <option value="vegetative" selected>Vegetative</option>
+                                <option value="flowering">Flowering</option>
+                                <option value="fruiting">Fruiting</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+                    <div class="card" style="background: var(--bg-primary);"><h3>Moisture (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="soilB">--</span> / <span id="targetMoistureB" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Nitrogen (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="nitrogenB" style="color: var(--text-main);">--</span> / <span id="targetNB" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Phosphorus (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="phosphorusB" style="color: var(--text-main);">--</span> / <span id="targetPB" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Potassium (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="potassiumB" style="color: var(--text-main);">--</span> / <span id="targetKB" style="color: var(--text-muted);">--</span></p></div>
+                </div>
+                <div id="recommendationBoxB" class="alert-box" style="margin-top: 15px; font-size: 0.85rem; padding: 12px 20px; border-left-color: var(--success)">Synchronizing Profile...</div>
             </div>
 
-            <div id="recommendationBox" class="alert-box">
-                Select your crop configuration metrics to build deployment profile summaries.
+            <div class="zone-block" style="border-left: 5px solid var(--warning); background: var(--bg-secondary); padding: 25px; border-radius: 0 12px 12px 0; margin-bottom: 35px; box-shadow: var(--card-shadow);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: var(--warning); font-size: 1.2rem;">📍 SOIL ZONE C (Precise Node 03)</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <div>
+                            <select id="cropSelectC" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                                <option value="pechay">Pechay (Native Cabbage)</option>
+                                <option value="kangkong">Kangkong (Water Spinach)</option>
+                                <option value="sitaw">Sitaw (String Beans)</option>
+                                <option value="talong">Talong (Eggplant)</option>
+                                <option value="silinglabuyo">Siling Labuyo (Chili)</option>
+                                <option value="kamatis" selected>Kamatis (Tomato)</option>
+                                <option value="ampalaya">Ampalaya (Bitter Gourd)</option>
+                                <option value="kalamansi">Kalamansi (Philippine Lime)</option>
+                                <option value="strawberry">Strawberry (Benguet Variety)</option>
+                                <option value="basil">Basil (Local Cultivar)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="growthStageC" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                                <option value="seedling">Seedling</option>
+                                <option value="vegetative">Vegetative</option>
+                                <option value="flowering">Flowering</option>
+                                <option value="fruiting" selected>Fruiting</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+                    <div class="card" style="background: var(--bg-primary);"><h3>Moisture (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="soilC">--</span> / <span id="targetMoistureC" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Nitrogen (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="nitrogenC" style="color: var(--text-main);">--</span> / <span id="targetNC" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Phosphorus (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="phosphorusC" style="color: var(--text-main);">--</span> / <span id="targetPC" style="color: var(--text-muted);">--</span></p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Potassium (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="potassiumC" style="color: var(--text-main);">--</span> / <span id="targetKC" style="color: var(--text-muted);">--</span></p></div>
+                </div>
+                <div id="recommendationBoxC" class="alert-box" style="margin-top: 15px; font-size: 0.85rem; padding: 12px 20px; border-left-color: var(--warning)">Synchronizing Profile...</div>
             </div>
         </section>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 40px;">
 
         <section id="controls">
-            <h2>Manual Actuator Testing</h2>
+            <h2>Manual Actuator Testing Engine</h2>
             <div class="card-grid">
-                <div class="card">
-                    <h3>Transfer Pump</h3>
-                    <span id="transferPumpStatus" class="device-status off">OFF</span>
-                </div>
-                <div class="card">
-                    <h3>Booster Distribution Pump</h3>
-                    <span id="boosterPumpStatus" class="device-status off">OFF</span>
-                </div>
+                <div class="card"><h3>Transfer Pump</h3><span id="transferPumpStatus" class="device-status off">OFF</span></div>
+                <div class="card"><h3>Booster Distribution Pump</h3><span id="boosterPumpStatus" class="device-status off">OFF</span></div>
             </div>
-
             <div class="control-grid">
                 <button id="transferPumpBtn">Toggle Transfer Pump</button>
                 <button id="boosterPumpBtn">Toggle Booster Pump</button>
@@ -154,7 +198,6 @@
                 <button id="valveBtn">Cycle Distribution Valves</button>
                 <button id="mixerBtn">Run Tank Agitator</button>
             </div>
-
             <div class="control-grid" style="margin-top: 30px;">
                 <button id="emergencyStop" class="danger">🚨 EMERGENCY SYSTEM STOP</button>
             </div>
