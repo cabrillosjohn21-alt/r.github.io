@@ -103,10 +103,10 @@ body {
 }
 
 /* ==========================================================================
-   MAIN CANVAS CONTENT (CRITICAL OVERLAP FIX)
+   MAIN CANVAS CONTENT
    ========================================================================== */
 .main-content {
-    margin-left: 280px; /* Safe margin spacing layout layout clears sidebar block */
+    margin-left: 280px; 
     flex: 1;
     padding: 40px;
     max-width: 1400px;
@@ -202,6 +202,7 @@ section h2 {
 .live-telemetry-text span {
     color: var(--text-main);
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 /* ==========================================================================
@@ -271,7 +272,7 @@ select {
 .device-status.off { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); }
 
 /* ==========================================================================
-   BUTTON ENGINE & INTERACTIVE TRIGGERS
+   BUTTON ENGINE
    ========================================================================== */
 button {
     background-color: var(--bg-secondary);
@@ -302,4 +303,23 @@ button.danger {
     padding: 12px 20px;
     border-radius: 0 12px 12px 0;
     font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   DYNAMIC TELEMETRY COLOR ALERTS (NEW WORK)
+   ========================================================================== */
+.lacking-nutrient {
+    color: var(--danger) !important;
+    font-weight: 800 !important;
+    background-color: rgba(239, 68, 68, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    animation: pulse-warn 2s infinite;
+}
+
+@keyframes pulse-warn {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
 }
