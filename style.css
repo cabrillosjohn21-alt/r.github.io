@@ -188,14 +188,8 @@ section h2 {
 .zone-header h3 { margin: 0; font-size: 1.2rem; }
 .zone-selectors { display: flex; gap: 15px; }
 
-.section-label {
-    margin-bottom: 15px; 
-    font-weight: 600; 
-    font-size: 0.9rem;
-}
-
 /* ==========================================================================
-   CARD SYSTEM GRID TILES & SIDE-BY-SIDE MATRIX LAYOUT
+   CARD SYSTEM GRID TILES & SIDE-BY-SIDE LAYOUT
    ========================================================================== */
 .card-grid {
     display: grid;
@@ -219,23 +213,23 @@ section h2 {
 .card h3 {
     font-size: 0.85rem;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 .card p {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--text-main);
 }
 
-/* Side-by-side element layout elements */
+/* Side-by-Side Content Configuration */
 .comparison-values {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 .comparison-values > div {
     flex: 1;
@@ -246,7 +240,7 @@ section h2 {
     font-size: 0.65rem;
     font-weight: 700;
     color: var(--text-muted);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 .divider-line {
     width: 1px;
@@ -327,13 +321,13 @@ button.danger {
 }
 
 /* ==========================================================================
-   DYNAMIC TELEMETRY COLOR ALERTS (RED PULSING DROPS)
+   DYNAMIC TELEMETRY COLOR ALERTS (RED CHANNELS)
    ========================================================================= */
 .lacking-nutrient {
     color: var(--danger) !important;
     font-weight: 800 !important;
     background-color: rgba(239, 68, 68, 0.15);
-    padding: 2px 6px;
+    padding: 4px 6px;
     border-radius: 6px;
     display: inline-block;
     animation: pulse-warn 1.5s infinite;
@@ -341,6 +335,6 @@ button.danger {
 
 @keyframes pulse-warn {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); background-color: rgba(239, 68, 68, 0.25); }
+    50% { transform: scale(1.03); background-color: rgba(239, 68, 68, 0.25); }
     100% { transform: scale(1); }
 }
