@@ -7,57 +7,57 @@ function random(min, max) {
 ========================== */
 const cropDatabase = {
     pechay: {
-        seedling: { n: 70, p: 35, k: 110, ph: "6.0 - 6.5", ec: "1.0 - 1.4", moisture: "65%" },
-        vegetative: { n: 140, p: 50, k: 210, ph: "6.0 - 7.0", ec: "1.5 - 2.0", moisture: "75%" }
+        seedling: { n: 70, p: 35, k: 110, ph: "6.0", ec: "1.0", moisture: "65%" },
+        vegetative: { n: 140, p: 50, k: 210, ph: "6.5", ec: "1.5", moisture: "75%" }
     },
     kangkong: {
-        seedling: { n: 60, p: 30, k: 100, ph: "5.5 - 6.5", ec: "0.8 - 1.2", moisture: "75%" },
-        vegetative: { n: 150, p: 45, k: 220, ph: "5.5 - 6.8", ec: "1.2 - 1.8", moisture: "85%" }
+        seedling: { n: 60, p: 30, k: 100, ph: "5.5", ec: "0.8", moisture: "75%" },
+        vegetative: { n: 150, p: 45, k: 220, ph: "6.0", ec: "1.2", moisture: "85%" }
     },
     sitaw: {
-        seedling: { n: 50, p: 40, k: 90, ph: "6.0 - 6.2", ec: "1.0 - 1.4", moisture: "60%" },
-        vegetative: { n: 100, p: 60, k: 160, ph: "6.0 - 6.8", ec: "1.4 - 2.0", moisture: "70%" },
-        flowering: { n: 90, p: 80, k: 200, ph: "6.0 - 6.8", ec: "1.8 - 2.2", moisture: "75%" }
+        seedling: { n: 50, p: 40, k: 90, ph: "6.0", ec: "1.0", moisture: "60%" },
+        vegetative: { n: 100, p: 60, k: 160, ph: "6.2", ec: "1.4", moisture: "70%" },
+        flowering: { n: 90, p: 80, k: 200, ph: "6.5", ec: "1.8", moisture: "75%" }
     },
     talong: {
-        seedling: { n: 100, p: 40, k: 110, ph: "5.8 - 6.2", ec: "1.2 - 1.6", moisture: "65%" },
-        vegetative: { n: 190, p: 55, k: 210, ph: "5.8 - 6.5", ec: "2.0 - 2.5", moisture: "70%" },
-        flowering: { n: 160, p: 65, k: 260, ph: "5.8 - 6.5", ec: "2.2 - 2.8", moisture: "75%" },
-        fruiting: { n: 140, p: 70, k: 300, ph: "5.8 - 6.5", ec: "2.4 - 3.2", moisture: "80%" }
+        seedling: { n: 100, p: 40, k: 110, ph: "5.8", ec: "1.2", moisture: "65%" },
+        vegetative: { n: 190, p: 55, k: 210, ph: "6.2", ec: "2.0", moisture: "70%" },
+        flowering: { n: 160, p: 65, k: 260, ph: "6.4", ec: "2.2", moisture: "75%" },
+        fruiting: { n: 140, p: 70, k: 300, ph: "6.5", ec: "2.4", moisture: "80%" }
     },
     silinglabuyo: {
-        seedling: { n: 90, p: 40, k: 110, ph: "5.8 - 6.2", ec: "1.0 - 1.5", moisture: "65%" },
-        vegetative: { n: 170, p: 50, k: 210, ph: "5.8 - 6.5", ec: "1.8 - 2.4", moisture: "70%" },
-        flowering: { n: 130, p: 65, k: 250, ph: "5.8 - 6.5", ec: "2.0 - 2.8", moisture: "75%" },
-        fruiting: { n: 110, p: 70, k: 290, ph: "5.8 - 6.5", ec: "2.2 - 3.2", moisture: "75%" }
+        seedling: { n: 90, p: 40, k: 110, ph: "5.8", ec: "1.0", moisture: "65%" },
+        vegetative: { n: 170, p: 50, k: 210, ph: "6.2", ec: "1.8", moisture: "70%" },
+        flowering: { n: 130, p: 65, k: 250, ph: "6.3", ec: "2.0", moisture: "75%" },
+        fruiting: { n: 110, p: 70, k: 290, ph: "6.5", ec: "2.2", moisture: "75%" }
     },
     kamatis: {
-        seedling: { n: 120, p: 50, k: 100, ph: "5.8 - 6.2", ec: "1.2 - 1.8", moisture: "65%" },
-        vegetative: { n: 220, p: 60, k: 180, ph: "5.8 - 6.5", ec: "2.0 - 3.0", moisture: "70%" },
-        flowering: { n: 180, p: 70, k: 250, ph: "5.8 - 6.5", ec: "2.5 - 3.2", moisture: "75%" },
-        fruiting: { n: 160, p: 70, k: 300, ph: "5.8 - 6.5", ec: "2.5 - 3.5", moisture: "80%" }
+        seedling: { n: 120, p: 50, k: 100, ph: "5.8", ec: "1.2", moisture: "65%" },
+        vegetative: { n: 220, p: 60, k: 180, ph: "6.0", ec: "2.0", moisture: "70%" },
+        flowering: { n: 180, p: 70, k: 250, ph: "6.2", ec: "2.5", moisture: "75%" },
+        fruiting: { n: 160, p: 70, k: 300, ph: "6.5", ec: "2.5", moisture: "80%" }
     },
     ampalaya: {
-        seedling: { n: 90, p: 50, k: 120, ph: "6.0 - 6.5", ec: "1.2 - 1.5", moisture: "65%" },
-        vegetative: { n: 180, p: 60, k: 220, ph: "6.0 - 6.8", ec: "1.8 - 2.4", moisture: "70%" },
-        flowering: { n: 150, p: 75, k: 260, ph: "6.0 - 6.8", ec: "2.2 - 2.8", moisture: "75%" },
-        fruiting: { n: 130, p: 80, k: 310, ph: "6.0 - 6.8", ec: "2.4 - 3.2", moisture: "75%" }
+        seedling: { n: 90, p: 50, k: 120, ph: "6.0", ec: "1.2", moisture: "65%" },
+        vegetative: { n: 180, p: 60, k: 220, ph: "6.2", ec: "1.8", moisture: "70%" },
+        flowering: { n: 150, p: 75, k: 260, ph: "6.5", ec: "2.2", moisture: "75%" },
+        fruiting: { n: 130, p: 80, k: 310, ph: "6.6", ec: "2.4", moisture: "75%" }
     },
     kalamansi: {
-        seedling: { n: 100, p: 30, k: 90, ph: "5.5 - 6.0", ec: "1.0 - 1.4", moisture: "60%" },
-        vegetative: { n: 180, p: 50, k: 180, ph: "5.5 - 6.5", ec: "1.5 - 2.2", moisture: "65%" },
-        flowering: { n: 150, p: 70, k: 220, ph: "5.5 - 6.5", ec: "2.0 - 2.6", moisture: "70%" },
-        fruiting: { n: 120, p: 60, k: 280, ph: "5.5 - 6.5", ec: "2.2 - 3.0", moisture: "70%" }
+        seedling: { n: 100, p: 30, k: 90, ph: "5.5", ec: "1.0", moisture: "60%" },
+        vegetative: { n: 180, p: 50, k: 180, ph: "5.8", ec: "1.5", moisture: "65%" },
+        flowering: { n: 150, p: 70, k: 220, ph: "6.0", ec: "2.0", moisture: "70%" },
+        fruiting: { n: 120, p: 60, k: 280, ph: "6.2", ec: "2.2", moisture: "70%" }
     },
     strawberry: {
-        seedling: { n: 70, p: 40, k: 90, ph: "5.5 - 6.0", ec: "1.0 - 1.5", moisture: "60%" },
-        vegetative: { n: 130, p: 50, k: 180, ph: "5.5 - 6.2", ec: "1.5 - 2.0", moisture: "65%" },
-        flowering: { n: 110, p: 60, k: 220, ph: "5.5 - 6.2", ec: "1.8 - 2.2", moisture: "70%" },
-        fruiting: { n: 90, p: 60, k: 260, ph: "5.5 - 6.2", ec: "2.0 - 2.5", moisture: "70%" }
+        seedling: { n: 70, p: 40, k: 90, ph: "5.5", ec: "1.0", moisture: "60%" },
+        vegetative: { n: 130, p: 50, k: 180, ph: "5.6", ec: "1.5", moisture: "65%" },
+        flowering: { n: 110, p: 60, k: 220, ph: "5.8", ec: "1.8", moisture: "70%" },
+        fruiting: { n: 90, p: 60, k: 260, ph: "6.0", ec: "2.0", moisture: "70%" }
     },
     basil: {
-        seedling: { n: 60, p: 30, k: 100, ph: "5.5 - 6.0", ec: "0.8 - 1.2", moisture: "60%" },
-        vegetative: { n: 140, p: 45, k: 210, ph: "5.5 - 6.5", ec: "1.4 - 2.2", moisture: "70%" }
+        seedling: { n: 60, p: 30, k: 100, ph: "5.5", ec: "0.8", moisture: "60%" },
+        vegetative: { n: 140, p: 45, k: 210, ph: "6.0", ec: "1.4", moisture: "70%" }
     }
 };
 
@@ -92,7 +92,7 @@ if (themeToggleBtn) {
 }
 
 /* ==========================
-   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE MATRIX UPDATER)
+   POLYCULTURE CONTROLLER MODULE (SIDE-BY-SIDE MATRIX REFACTOR)
 ========================== */
 function syncZoneProfile(zoneId) {
     const cropSelect = document.getElementById(`cropSelect${zoneId}`);
@@ -103,7 +103,7 @@ function syncZoneProfile(zoneId) {
     const crop = cropSelect.value.toLowerCase().trim();
     const availableStages = Object.keys(cropDatabase[crop]);
 
-    // Step 1: Manage available stages dynamically per zone container
+    // Manage select field states
     Array.from(growthStage.options).forEach(option => {
         if (availableStages.includes(option.value)) {
             option.disabled = false;
@@ -117,33 +117,25 @@ function syncZoneProfile(zoneId) {
         }
     });
 
-    // Step 2: Render unique target fields safely into card dashboard matrices
     const activeStage = growthStage.value;
     const data = cropDatabase[crop][activeStage];
 
     if (data) {
-        const targetNEl = document.getElementById(`targetN${zoneId}`);
-        const targetPEl = document.getElementById(`targetP${zoneId}`);
-        const targetKEl = document.getElementById(`targetK${zoneId}`);
-        const targetPHEl = document.getElementById(`targetPH${zoneId}`);
-        const targetECEl = document.getElementById(`targetEC${zoneId}`);
-        const targetMoistureEl = document.getElementById(`targetMoisture${zoneId}`);
+        setElementText(`targetN${zoneId}`, data.n + " ppm");
+        setElementText(`targetP${zoneId}`, data.p + " ppm");
+        setElementText(`targetK${zoneId}`, data.k + " ppm");
+        setElementText(`targetPH${zoneId}`, data.ph);
+        setElementText(`targetEC${zoneId}`, data.ec + " mS/cm");
+        setElementText(`targetMoisture${zoneId}`, data.moisture);
+
         const recommendationBox = document.getElementById(`recommendationBox${zoneId}`);
-
-        if (targetNEl) targetNEl.innerText = data.n + " ppm";
-        if (targetPEl) targetPEl.innerText = data.p + " ppm";
-        if (targetKEl) targetKEl.innerText = data.k + " ppm";
-        if (targetPHEl) targetPHEl.innerText = data.ph;
-        if (targetECEl) targetECEl.innerText = data.ec + " mS/cm";
-        if (targetMoistureEl) targetMoistureEl.innerText = data.moisture;
-
         if (recommendationBox) {
-            recommendationBox.innerHTML = `🎯 <b>${readableCropNames[crop]} [${activeStage.toUpperCase()}] Targets:</b> pH: ${data.ph} | EC: ${data.ec} mS/cm | Optimal Moisture: ${data.moisture}`;
+            recommendationBox.innerHTML = `🎯 <b>${readableCropNames[crop]} [${activeStage.toUpperCase()}] Active Targets:</b> NPK: ${data.n}-${data.p}-${data.k} | pH: ${data.ph} | EC: ${data.ec} mS/cm`;
         }
     }
 }
 
-// Attach distinct management event hooks
+// Bind drop-down selections to trigger instant re-calculations
 ["A", "B", "C"].forEach(zone => {
     const cSel = document.getElementById(`cropSelect${zone}`);
     const gSel = document.getElementById(`growthStage${zone}`);
@@ -152,37 +144,37 @@ function syncZoneProfile(zoneId) {
 });
 
 /* ==========================
-   DASHBOARD TELEMETRY LOOP WITH DEFICIENCY CHECKER (NEW WORK)
+   SIDE-BY-SIDE DEFICIENCY CHECKER
 ========================== */
 function setElementText(id, value) {
     const el = document.getElementById(id);
     if (el) el.innerText = value;
 }
 
-// Compares live numerical text vs target presets and injects red flashing alerts
-function checkNutrientDeficiency(liveValue, targetElementId, liveDisplayElementId, unitString) {
+// Checks if a live value falls below the target value and applies styling accordingly
+function checkNutrientDeficiency(liveValue, targetElementId, liveDisplayElementId, unitString, isFloat = false) {
     const targetElement = document.getElementById(targetElementId);
     const liveElement = document.getElementById(liveDisplayElementId);
     
     if (!targetElement || !liveElement) return;
 
-    // Convert target text configuration into an integer (e.g. "140 ppm" -> 140)
-    const targetNum = parseInt(targetElement.innerText);
+    // Parse values depending on whether they are whole numbers or floats (EC/pH)
+    const targetNum = isFloat ? parseFloat(targetElement.innerText) : parseInt(targetElement.innerText);
+    const formattedUnit = unitString ? " " + unitString : "";
     
-    // Set standard readout string text
-    liveElement.innerText = liveValue + " " + unitString;
+    liveElement.innerText = liveValue + formattedUnit;
 
     if (!isNaN(targetNum) && liveValue < targetNum) {
-        // Condition matches deficiency trigger: throw CSS warning rules
+        // Below target threshold -> trigger red warning style
         liveElement.className = "lacking-nutrient";
     } else {
-        // Safe readout parameters
+        // Normal or above target -> clear warning style
         liveElement.className = "";
     }
 }
 
 function updateDashboard() {
-    // Environmental Infrastructure Readings
+    // Shared Ambient Infrastructure Sensors
     setElementText("reservoirLevel", random(75, 98) + "%");
     setElementText("mixingLevel", random(45, 85) + "%");
     setElementText("flowRate", random(4, 8) + " L/min");
@@ -192,34 +184,53 @@ function updateDashboard() {
     setElementText("phLevel", (Math.random() * 0.8 + 6.0).toFixed(2));
     setElementText("ecLevel", (Math.random() * 0.6 + 1.4).toFixed(2) + " mS/cm");
 
-    // Dynamic Live Node Telemetry Readings (Ranges allow testing both normal and alert states)
+    // --- SOIL ZONE A COMPONENT TELEMETRY ---
     const nA = random(60, 180);  const pA = random(30, 60);  const kA = random(95, 250);
-    setElementText("soilA", random(68, 74) + "%");
+    const phA = parseFloat((Math.random() * 1.2 + 5.5).toFixed(1));
+    const ecA = parseFloat((Math.random() * 1.0 + 0.8).toFixed(1));
+    const moistA = random(55, 85);
+
     checkNutrientDeficiency(nA, "targetNA", "nitrogenA", "ppm");
     checkNutrientDeficiency(pA, "targetPA", "phosphorusA", "ppm");
     checkNutrientDeficiency(kA, "targetKA", "potassiumA", "ppm");
+    checkNutrientDeficiency(phA, "targetPHA", "soilPHA", "", true);
+    checkNutrientDeficiency(ecA, "targetECA", "soilECA", "mS/cm", true);
+    checkNutrientDeficiency(moistA, "targetMoistureA", "soilA", "%");
 
+    // --- SOIL ZONE B COMPONENT TELEMETRY ---
     const nB = random(60, 180);  const pB = random(30, 60);  const kB = random(95, 250);
-    setElementText("soilB", random(72, 82) + "%");
+    const phB = parseFloat((Math.random() * 1.2 + 5.5).toFixed(1));
+    const ecB = parseFloat((Math.random() * 1.0 + 0.8).toFixed(1));
+    const moistB = random(55, 85);
+
     checkNutrientDeficiency(nB, "targetNB", "nitrogenB", "ppm");
     checkNutrientDeficiency(pB, "targetPB", "phosphorusB", "ppm");
     checkNutrientDeficiency(kB, "targetKB", "potassiumB", "ppm");
+    checkNutrientDeficiency(phB, "targetPHB", "soilPHB", "", true);
+    checkNutrientDeficiency(ecB, "targetECB", "soilECB", "mS/cm", true);
+    checkNutrientDeficiency(moistB, "targetMoistureB", "soilB", "%");
 
+    // --- SOIL ZONE C COMPONENT TELEMETRY ---
     const nC = random(60, 180);  const pC = random(30, 60);  const kC = random(95, 250);
-    setElementText("soilC", random(76, 84) + "%");
+    const phC = parseFloat((Math.random() * 1.2 + 5.5).toFixed(1));
+    const ecC = parseFloat((Math.random() * 1.0 + 0.8).toFixed(1));
+    const moistC = random(55, 85);
+
     checkNutrientDeficiency(nC, "targetNC", "nitrogenC", "ppm");
     checkNutrientDeficiency(pC, "targetPC", "phosphorusC", "ppm");
     checkNutrientDeficiency(kC, "targetKC", "potassiumC", "ppm");
+    checkNutrientDeficiency(phC, "targetPHC", "soilPHC", "", true);
+    checkNutrientDeficiency(ecC, "targetECC", "soilECC", "mS/cm", true);
+    checkNutrientDeficiency(moistC, "targetMoistureC", "soilC", "%");
     
-    // Electrical parameters
+    // Power Profiles
     setElementText("batteryLevel", random(82, 100) + "%");
     setElementText("voltage", (Math.random() * 1 + 12).toFixed(1) + "V");
     setElementText("powerSource", Math.random() > 0.3 ? "Solar PV Matrix" : "Battery Storage");
 
-    // System State Indicator evaluation rules
+    // Global Telemetry Status evaluation
     const systemN = (nA + nB + nC) / 3;
     const systemK = (kA + kB + kC) / 3;
-    
     const nutrientIndicator = document.getElementById("nutrientSystemIndicator");
     if (nutrientIndicator) {
         if (systemN < 120 || systemK < 150) {
@@ -271,7 +282,7 @@ if (emergencyStop) {
     });
 }
 
-// System Execution Instantiation Hooks
+// System Execution Startup Initialization Loops
 setInterval(updateDashboard, 2000);
 ["A", "B", "C"].forEach(zone => syncZoneProfile(zone));
 updateDashboard();
