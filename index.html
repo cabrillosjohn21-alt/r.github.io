@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydroponics Automation Dashboard</title>
+    <title>Hydroponics & Soil Automation Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,7 +42,7 @@
         </div>
 
         <section id="dashboard">
-            <h2>Live Telemetry</h2>
+            <h2>Live Telemetry Summary</h2>
             <div class="card-grid">
                 <div class="card"><h3>Reservoir Level</h3><p id="reservoirLevel">--</p></div>
                 <div class="card"><h3>Mixing Tank Level</h3><p id="mixingLevel">--</p></div>
@@ -53,19 +53,35 @@
             </div>
 
             <div class="card-grid">
-                <div class="card"><h3>Soil Zone A Moisture</h3><p id="soilA">--</p></div>
-                <div class="card"><h3>Soil Zone B Moisture</h3><p id="soilB">--</p></div>
-                <div class="card"><h3>Soil Zone C Moisture</h3><p id="soilC">--</p></div>
+                <div class="card"><h3>System pH Balance</h3><p id="phLevel">--</p></div>
+                <div class="card"><h3>System EC Value</h3><p id="ecLevel">--</p></div>
             </div>
 
+            <h3>📍 SOIL ZONE A (Node 01 Telemetry)</h3>
             <div class="card-grid">
-                <div class="card"><h3>Nitrogen (N)</h3><p id="nitrogen">--</p></div>
-                <div class="card"><h3>Phosphorus (P)</h3><p id="phosphorus">--</p></div>
-                <div class="card"><h3>Potassium (K)</h3><p id="potassium">--</p></div>
-                <div class="card"><h3>pH Balance</h3><p id="phLevel">--</p></div>
-                <div class="card"><h3>EC Value</h3><p id="ecLevel">--</p></div>
+                <div class="card" style="border-left: 4px solid #3b82f6;"><h3>Zone A Moisture</h3><p id="soilA">--</p></div>
+                <div class="card"><h3>Zone A - Nitrogen (N)</h3><p id="nitrogenA">--</p></div>
+                <div class="card"><h3>Zone A - Phosphorus (P)</h3><p id="phosphorusA">--</p></div>
+                <div class="card"><h3>Zone A - Potassium (K)</h3><p id="potassiumA">--</p></div>
             </div>
 
+            <h3>📍 SOIL ZONE B (Node 02 Telemetry)</h3>
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid #10b981;"><h3>Zone B Moisture</h3><p id="soilB">--</p></div>
+                <div class="card"><h3>Zone B - Nitrogen (N)</h3><p id="nitrogenB">--</p></div>
+                <div class="card"><h3>Zone B - Phosphorus (P)</h3><p id="phosphorusB">--</p></div>
+                <div class="card"><h3>Zone B - Potassium (K)</h3><p id="potassiumB">--</p></div>
+            </div>
+
+            <h3>📍 SOIL ZONE C (Node 03 Telemetry)</h3>
+            <div class="card-grid">
+                <div class="card" style="border-left: 4px solid #f59e0b;"><h3>Zone C Moisture</h3><p id="soilC">--</p></div>
+                <div class="card"><h3>Zone C - Nitrogen (N)</h3><p id="nitrogenC">--</p></div>
+                <div class="card"><h3>Zone C - Phosphorus (P)</h3><p id="phosphorusC">--</p></div>
+                <div class="card"><h3>Zone C - Potassium (K)</h3><p id="potassiumC">--</p></div>
+            </div>
+
+            <h3>🔋 Electrical Power Subsystem</h3>
             <div class="card-grid">
                 <div class="card"><h3>Battery Charge</h3><p id="batteryLevel">--</p></div>
                 <div class="card"><h3>Bus Voltage</h3><p id="voltage">--</p></div>
