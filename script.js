@@ -92,7 +92,7 @@ if (themeToggleBtn) {
 }
 
 /* ==========================
-   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE INSTANCES)
+   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE INSTANCES - FIXED)
 ========================== */
 function syncZoneProfile(zoneId) {
     const cropSelect = document.getElementById(`cropSelect${zoneId}`);
@@ -117,17 +117,26 @@ function syncZoneProfile(zoneId) {
         }
     });
 
-    // Step 2: Render unique target fields
+    // Step 2: Render unique target fields safely with exact matched IDs
     const activeStage = growthStage.value;
     const data = cropDatabase[crop][activeStage];
 
-    document.getElementById(`targetN${zoneId}`).innerText = data.n + " ppm";
-    document.getElementById(`targetP${zoneId}`).innerText = data.p + " ppm";
-    document.getElementById(`targetK${zoneId}`).innerText = data.k + " ppm";
-    document.getElementById(`targetMoisture${zoneId}`).innerText = data.moisture;
+    if (data) {
+        const targetNEl = document.getElementById(`targetN${zoneId}`);
+        const targetPEl = document.getElementById(`targetP${zoneId}`);
+        const targetKEl = document.getElementById(`targetK${zoneId}`);
+        const targetMoistureEl = document.getElementById(`targetMoisture${zoneId}`);
+        const recommendationBox = document.getElementById(`recommendationBox${zoneId}`);
 
-    document.getElementById(`recommendationBox${zoneId}`).innerHTML = 
-        `🎯 <b>${readableCropNames[crop]} [${activeStage.toUpperCase()}] Targets:</b> pH: ${data.ph} | EC: ${data.ec} mS/cm | Optimal Moisture: ${data.moisture}`;
+        if (targetNEl) targetNEl.innerText = data.n + " ppm";
+        if (targetPEl) targetPEl.innerText = data.p + " ppm";
+        if (targetKEl) targetKEl.innerText = data.k + " ppm";
+        if (targetMoistureEl) targetMoistureEl.innerText = data.moisture;
+
+        if (recommendationBox) {
+            recommendationBox.innerHTML = `🎯 <b>${readableCropNames[crop]} [${activeStage.toUpperCase()}] Targets:</b> pH: ${data.ph} | EC: ${data.ec} mS/cm | Optimal Moisture: ${data.moisture}`;
+        }
+    }
 }
 
 // Attach distinct management event hooks
