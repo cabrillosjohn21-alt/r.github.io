@@ -5,18 +5,61 @@ function random(min, max) {
 }
 
 /* ==========================
-   CROP DATABASE (2 Primary Plants with NPK Focus)
+   PHILIPPINE CROP DATABASE (10 Common Local Plants)
 ========================== */
 const cropDatabase = {
-    tomato: {
+    pechay: {
+        seedling: { n: 70, p: 35, k: 110, ph: "6.0 - 6.5", ec: "1.0 - 1.4", moisture: "65%" },
+        vegetative: { n: 140, p: 50, k: 210, ph: "6.0 - 7.0", ec: "1.5 - 2.0", moisture: "75%" }
+    },
+    kangkong: {
+        seedling: { n: 60, p: 30, k: 100, ph: "5.5 - 6.5", ec: "0.8 - 1.2", moisture: "75%" },
+        vegetative: { n: 150, p: 45, k: 220, ph: "5.5 - 6.8", ec: "1.2 - 1.8", moisture: "85%" }
+    },
+    sitaw: {
+        seedling: { n: 50, p: 40, k: 90, ph: "6.0 - 6.2", ec: "1.0 - 1.4", moisture: "60%" },
+        vegetative: { n: 100, p: 60, k: 160, ph: "6.0 - 6.8", ec: "1.4 - 2.0", moisture: "70%" },
+        flowering: { n: 90, p: 80, k: 200, ph: "6.0 - 6.8", ec: "1.8 - 2.2", moisture: "75%" }
+    },
+    talong: {
+        seedling: { n: 100, p: 40, k: 110, ph: "5.8 - 6.2", ec: "1.2 - 1.6", moisture: "65%" },
+        vegetative: { n: 190, p: 55, k: 210, ph: "5.8 - 6.5", ec: "2.0 - 2.5", moisture: "70%" },
+        flowering: { n: 160, p: 65, k: 260, ph: "5.8 - 6.5", ec: "2.2 - 2.8", moisture: "75%" },
+        fruiting: { n: 140, p: 70, k: 300, ph: "5.8 - 6.5", ec: "2.4 - 3.2", moisture: "80%" }
+    },
+    silingLabuyo: {
+        seedling: { n: 90, p: 40, k: 110, ph: "5.8 - 6.2", ec: "1.0 - 1.5", moisture: "65%" },
+        vegetative: { n: 170, p: 50, k: 210, ph: "5.8 - 6.5", ec: "1.8 - 2.4", moisture: "70%" },
+        flowering: { n: 130, p: 65, k: 250, ph: "5.8 - 6.5", ec: "2.0 - 2.8", moisture: "75%" },
+        fruiting: { n: 110, p: 70, k: 290, ph: "5.8 - 6.5", ec: "2.2 - 3.2", moisture: "75%" }
+    },
+    kamatis: {
         seedling: { n: 120, p: 50, k: 100, ph: "5.8 - 6.2", ec: "1.2 - 1.8", moisture: "65%" },
         vegetative: { n: 220, p: 60, k: 180, ph: "5.8 - 6.5", ec: "2.0 - 3.0", moisture: "70%" },
         flowering: { n: 180, p: 70, k: 250, ph: "5.8 - 6.5", ec: "2.5 - 3.2", moisture: "75%" },
         fruiting: { n: 160, p: 70, k: 300, ph: "5.8 - 6.5", ec: "2.5 - 3.5", moisture: "80%" }
     },
-    lettuce: {
-        seedling: { n: 80, p: 40, k: 120, ph: "5.5 - 6.5", ec: "0.8 - 1.2", moisture: "70%" },
-        vegetative: { n: 150, p: 50, k: 200, ph: "5.5 - 6.5", ec: "1.2 - 1.8", moisture: "75%" }
+    ampalaya: {
+        seedling: { n: 90, p: 50, k: 120, ph: "6.0 - 6.5", ec: "1.2 - 1.5", moisture: "65%" },
+        vegetative: { n: 180, p: 60, k: 220, ph: "6.0 - 6.8", ec: "1.8 - 2.4", moisture: "70%" },
+        flowering: { n: 150, p: 75, k: 260, ph: "6.0 - 6.8", ec: "2.2 - 2.8", moisture: "75%" },
+        fruiting: { n: 130, p: 80, k: 310, ph: "6.0 - 6.8", ec: "2.4 - 3.2", moisture: "75%" }
+    },
+    kalamansi: {
+        seedling: { n: 100, p: 30, k: 90, ph: "5.5 - 6.0", ec: "1.0 - 1.4", moisture: "60%" },
+        vegetative: { n: 180, p: 50, k: 180, ph: "5.5 - 6.5", ec: "1.5 - 2.2", moisture: "65%" },
+        flowering: { n: 150, p: 70, k: 220, ph: "5.5 - 6.5", ec: "2.0 - 2.6", moisture: "70%" },
+        fruiting: { n: 120, p: 60, k: 280, ph: "5.5 - 6.5", ec: "2.2 - 3.0", moisture: "70%" }
+    },
+    strawberry: {
+        seedling: { n: 70, p: 40, k: 90, ph: "5.5 - 6.0", ec: "1.0 - 1.5", moisture: "60%" },
+        vegetative: { n: 130, p: 50, k: 180, ph: "5.5 - 6.2", ec: "1.5 - 2.0", moisture: "65%" },
+        flowering: { n: 110, p: 60, k: 220, ph: "5.5 - 6.2", ec: "1.8 - 2.2", moisture: "70%" },
+        fruiting: { n: 90, p: 60, k: 260, ph: "5.5 - 6.2", ec: "2.0 - 2.5", moisture: "70%" }
+    },
+    basil: {
+        seedling: { n: 60, p: 30, k: 100, ph: "5.5 - 6.0", ec: "0.8 - 1.2", moisture: "60%" },
+        vegetative: { n: 140, p: 45, k: 210, ph: "5.5 - 6.5", ec: "1.4 - 2.2", moisture: "70%" }
     }
 };
 
@@ -24,7 +67,6 @@ const cropDatabase = {
    THEME TOGGLE SYSTEM
 ========================== */
 const themeToggleBtn = document.getElementById('theme-toggle');
-
 if (themeToggleBtn) {
     const currentTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', currentTheme);
@@ -33,7 +75,6 @@ if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
         let theme = document.documentElement.getAttribute('data-theme');
         theme = (theme === 'dark') ? 'light' : 'dark';
-        
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         updateToggleText(theme);
@@ -47,9 +88,37 @@ function updateToggleText(theme) {
 }
 
 /* ==========================
-   CROP PRESET LOGIC
+   CROP PRESET LOGIC & STAGE DISABLER
 ========================== */
+function adjustAvailableStages() {
+    const cropSelect = document.getElementById("cropSelect");
+    const growthStage = document.getElementById("growthStage");
+    
+    if (!cropSelect || !growthStage) return;
+    
+    const crop = cropSelect.value;
+    const availableStages = Object.keys(cropDatabase[crop]);
+    
+    // Check options inside the dropdown list
+    Array.from(growthStage.options).forEach(option => {
+        if (availableStages.includes(option.value)) {
+            option.disabled = false;
+            option.style.opacity = "1";
+        } else {
+            option.disabled = true;
+            option.style.opacity = "0.3"; // Dim disabled options visually
+            
+            // If the user was on "Flowering" but switched to Pechay, reset select down to "Vegetative"
+            if (growthStage.value === option.value) {
+                growthStage.value = "vegetative";
+            }
+        }
+    });
+}
+
 function updateCropPreset() {
+    adjustAvailableStages(); // Sync dropdown elements first
+    
     const cropSelect = document.getElementById("cropSelect");
     const growthStage = document.getElementById("growthStage");
     
@@ -66,18 +135,9 @@ function updateCropPreset() {
     const targetMoisture = document.getElementById("targetMoisture");
     const recommendationBox = document.getElementById("recommendationBox");
 
-    if (!cropDatabase[crop] || !cropDatabase[crop][stage]) {
-        if (targetN) targetN.innerText = "N/A";
-        if (targetP) targetP.innerText = "N/A";
-        if (targetK) targetK.innerText = "N/A";
-        if (targetPH) targetPH.innerText = "N/A";
-        if (targetEC) targetEC.innerText = "N/A";
-        if (targetMoisture) targetMoisture.innerText = "N/A";
-        if (recommendationBox) recommendationBox.innerHTML = "No configuration data found for this stage.";
-        return;
-    }
-
     const data = cropDatabase[crop][stage];
+
+    if (!data) return;
 
     if (targetN) targetN.innerText = data.n + " ppm";
     if (targetP) targetP.innerText = data.p + " ppm";
@@ -87,14 +147,28 @@ function updateCropPreset() {
     if (targetMoisture) targetMoisture.innerText = data.moisture;
 
     if (recommendationBox) {
+        // Format names nicely for local display context
+        const readableCropNames = {
+            pechay: "Pechay (Native Leafy Cabbage)",
+            kangkong: "Kangkong (Water Spinach)",
+            sitaw: "Sitaw (String Beans)",
+            talong: "Talong (Eggplant)",
+            silingLabuyo: "Siling Labuyo (Native Chili)",
+            kamatis: "Kamatis (Tomato)",
+            ampalaya: "Ampalaya (Bitter Gourd)",
+            kalamansi: "Kalamansi (Local Lime)",
+            strawberry: "Strawberry (La Trinidad Hybrid)",
+            basil: "Basil (Sweet Local Cultivar)"
+        };
+
         recommendationBox.innerHTML = `
-            Recommended Health Targets for <b>${crop.toUpperCase()}</b> (${stage})<br><br>
-            <strong>Primary Nutrients Needed:</strong><br>
+            Recommended Profile for <b>${readableCropNames[crop] || crop.toUpperCase()}</b> (${stage})<br><br>
+            <strong>Target Macronutrients (NPK):</strong><br>
             • Nitrogen (N): ${data.n} ppm<br>
             • Phosphorus (P): ${data.p} ppm<br>
             • Potassium (K): ${data.k} ppm<br><br>
-            <strong>Environment:</strong><br>
-            • pH Range: ${data.ph} | EC Range: ${data.ec} | Moisture: ${data.moisture}
+            <strong>Target Environment Criteria:</strong><br>
+            • Optimal pH: ${data.ph} | EC Range: ${data.ec} mS/cm | Ideal Moisture: ${data.moisture}
         `;
     }
 }
@@ -113,7 +187,6 @@ function setElementText(id, value) {
 }
 
 function updateDashboard() {
-    // Generate sensor data values
     const currentN = random(100, 250);
     const currentP = random(50, 150);
     const currentK = random(100, 300);
@@ -121,19 +194,18 @@ function updateDashboard() {
     setElementText("reservoirLevel", random(50, 100) + "%");
     setElementText("mixingLevel", random(30, 90) + "%");
     setElementText("flowRate", random(2, 10) + " L/min");
-    setElementText("temperature", random(25, 35) + "°C");
-    setElementText("humidity", random(50, 90) + "%");
+    setElementText("temperature", random(25, 33) + "°C"); // Calibrated for PH greenhouse environments
+    setElementText("humidity", random(60, 95) + "%");     // Matches local humidity thresholds
     setElementText("lightLevel", random(500, 3000) + " lux");
     setElementText("soilA", random(40, 90) + "%");
     setElementText("soilB", random(40, 90) + "%");
     setElementText("soilC", random(40, 90) + "%");
     
-    // NPK live values
     setElementText("nitrogen", currentN + " ppm");
     setElementText("phosphorus", currentP + " ppm");
     setElementText("potassium", currentK + " ppm");
     
-    setElementText("phLevel", (Math.random() * 2 + 5.5).toFixed(2));
+    setElementText("phLevel", (Math.random() * 1.5 + 5.5).toFixed(2));
     setElementText("ecLevel", (Math.random() * 2 + 1).toFixed(2) + " mS/cm");
     setElementText("batteryLevel", random(40, 100) + "%");
     setElementText("voltage", random(11, 14) + "V");
@@ -141,7 +213,6 @@ function updateDashboard() {
     setElementText("powerDraw", random(50, 500) + "W");
     setElementText("powerSource", Math.random() > 0.5 ? "Solar" : "Battery");
 
-    // Dynamic Updates for the 2 Running Indicators
     updateRunningIndicators(currentN, currentP, currentK);
 }
 
@@ -152,9 +223,8 @@ function updateRunningIndicators(n, p, k) {
 
     if (systemState && systemState.innerText === "EMERGENCY") return;
 
-    // Indicator 1: Nutrient Feed Health check (Checks if NPK variables look stable)
     if (nutrientIndicator) {
-        if (n < 110 || k < 120) {
+        if (n < 110 || k < 140) {
             nutrientIndicator.innerText = "DOSING REQUIRED";
             nutrientIndicator.className = "device-status warning-status";
         } else {
@@ -163,10 +233,8 @@ function updateRunningIndicators(n, p, k) {
         }
     }
 
-    // Indicator 2: Sensor Array Connectivity status 
     if (sensorIndicator) {
-        // Simulates intermittent data telemetry health validation
-        if (Math.random() > 0.95) {
+        if (Math.random() > 0.97) {
             sensorIndicator.innerText = "LAG/POLLING";
             sensorIndicator.className = "device-status warning-status";
         } else {
@@ -217,7 +285,6 @@ if (emergencyStop) {
             stateLabel.className = "device-status danger"; 
         }
 
-        // Shut down running dashboard state metrics
         const nutrientIndicator = document.getElementById("nutrientSystemIndicator");
         const sensorIndicator = document.getElementById("sensorArrayIndicator");
         if (nutrientIndicator) { nutrientIndicator.innerText = "SHUTDOWN"; nutrientIndicator.className = "device-status danger"; }
@@ -226,18 +293,12 @@ if (emergencyStop) {
         const transferPumpStatus = document.getElementById("transferPumpStatus");
         const boosterPumpStatus = document.getElementById("boosterPumpStatus");
         
-        if (transferPumpStatus) {
-            transferPumpStatus.className = "device-status off";
-            transferPumpStatus.innerText = "OFF";
-        }
-        if (boosterPumpStatus) {
-            boosterPumpStatus.className = "device-status off";
-            boosterPumpStatus.innerText = "OFF";
-        }
+        if (transferPumpStatus) { transferPumpStatus.className = "device-status off"; transferPumpStatus.innerText = "OFF"; }
+        if (boosterPumpStatus) { boosterPumpStatus.className = "device-status off"; boosterPumpStatus.innerText = "OFF"; }
     });
 }
 
-// Run Initial Setup Loops
+// Initial Loops
 setInterval(updateDashboard, 2000);
 updateDashboard();
 updateCropPreset();
