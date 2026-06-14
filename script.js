@@ -92,7 +92,7 @@ if (themeToggleBtn) {
 }
 
 /* ==========================
-   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE INSTANCES - FIXED)
+   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE INSTANCES - COMPATIBILITY FIX)
 ========================== */
 function syncZoneProfile(zoneId) {
     const cropSelect = document.getElementById(`cropSelect${zoneId}`);
@@ -103,7 +103,7 @@ function syncZoneProfile(zoneId) {
     const crop = cropSelect.value.toLowerCase().trim();
     const availableStages = Object.keys(cropDatabase[crop]);
 
-    // Step 1: Manage available stages for leafy greens vs fruiting targets per zone
+    // Step 1: Manage available stages dynamically per zone
     Array.from(growthStage.options).forEach(option => {
         if (availableStages.includes(option.value)) {
             option.disabled = false;
@@ -117,7 +117,7 @@ function syncZoneProfile(zoneId) {
         }
     });
 
-    // Step 2: Render unique target fields safely with exact matched IDs
+    // Step 2: Render unique target fields safely into card dashboard matrix
     const activeStage = growthStage.value;
     const data = cropDatabase[crop][activeStage];
 
@@ -125,12 +125,16 @@ function syncZoneProfile(zoneId) {
         const targetNEl = document.getElementById(`targetN${zoneId}`);
         const targetPEl = document.getElementById(`targetP${zoneId}`);
         const targetKEl = document.getElementById(`targetK${zoneId}`);
+        const targetPHEl = document.getElementById(`targetPH${zoneId}`);
+        const targetECEl = document.getElementById(`targetEC${zoneId}`);
         const targetMoistureEl = document.getElementById(`targetMoisture${zoneId}`);
         const recommendationBox = document.getElementById(`recommendationBox${zoneId}`);
 
         if (targetNEl) targetNEl.innerText = data.n + " ppm";
         if (targetPEl) targetPEl.innerText = data.p + " ppm";
         if (targetKEl) targetKEl.innerText = data.k + " ppm";
+        if (targetPHEl) targetPHEl.innerText = data.ph;
+        if (targetECEl) targetECEl.innerText = data.ec + " mS/cm";
         if (targetMoistureEl) targetMoistureEl.innerText = data.moisture;
 
         if (recommendationBox) {
