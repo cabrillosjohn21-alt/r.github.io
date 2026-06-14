@@ -15,9 +15,16 @@
             <li><a href="#presets">🌱 Crop Presets</a></li>
             <li><a href="#controls">🎛️ Hardware Controls</a></li>
         </ul>
+        
         <div class="system-status">
             <h3>System State:</h3>
             <span id="systemState" class="device-status active">RUNNING</span>
+            
+            <h3>Nutrient Feed Loop:</h3>
+            <span id="nutrientSystemIndicator" class="device-status active">BALANCED</span>
+
+            <h3>Sensor Array Link:</h3>
+            <span id="sensorArrayIndicator" class="device-status active">SAMPLING LIVE</span>
         </div>
     </div>
 
@@ -72,13 +79,10 @@
             <h2>Crop Target Overrides</h2>
             <div class="control-grid">
                 <div>
-                    <label for="cropSelect">Select Crop:</label>
+                    <label for="cropSelect">Select Crop Focus:</label>
                     <select id="cropSelect">
-                        <option value="tomato">Tomato</option>
-                        <option value="lettuce">Lettuce</option>
-                        <option value="spinach">Spinach</option>
-                        <option value="eggplant">Eggplant</option>
-                        <option value="cucumber">Cucumber</option>
+                        <option value="tomato">Tomato (NPK Heavy)</option>
+                        <option value="lettuce">Lettuce (Leafy NPK Balance)</option>
                     </select>
                 </div>
                 <div>
