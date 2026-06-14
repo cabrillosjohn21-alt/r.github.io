@@ -92,7 +92,7 @@ if (themeToggleBtn) {
 }
 
 /* ==========================
-   POLYCULTURE CONTROLLER MODULE (SIDE-BY-SIDE MATRIX REFACTOR)
+   POLYCULTURE CONTROLLER MODULE
 ========================== */
 function syncZoneProfile(zoneId) {
     const cropSelect = document.getElementById(`cropSelect${zoneId}`);
@@ -103,7 +103,6 @@ function syncZoneProfile(zoneId) {
     const crop = cropSelect.value.toLowerCase().trim();
     const availableStages = Object.keys(cropDatabase[crop]);
 
-    // Manage select field states
     Array.from(growthStage.options).forEach(option => {
         if (availableStages.includes(option.value)) {
             option.disabled = false;
@@ -135,7 +134,6 @@ function syncZoneProfile(zoneId) {
     }
 }
 
-// Bind drop-down selections to trigger instant re-calculations
 ["A", "B", "C"].forEach(zone => {
     const cSel = document.getElementById(`cropSelect${zone}`);
     const gSel = document.getElementById(`growthStage${zone}`);
@@ -144,37 +142,33 @@ function syncZoneProfile(zoneId) {
 });
 
 /* ==========================
-   SIDE-BY-SIDE DEFICIENCY CHECKER
+   SIDE-BY-SIDE MATRIX DEFICIENCY ENGINE
 ========================== */
 function setElementText(id, value) {
     const el = document.getElementById(id);
     if (el) el.innerText = value;
 }
 
-// Checks if a live value falls below the target value and applies styling accordingly
 function checkNutrientDeficiency(liveValue, targetElementId, liveDisplayElementId, unitString, isFloat = false) {
     const targetElement = document.getElementById(targetElementId);
     const liveElement = document.getElementById(liveDisplayElementId);
     
     if (!targetElement || !liveElement) return;
 
-    // Parse values depending on whether they are whole numbers or floats (EC/pH)
     const targetNum = isFloat ? parseFloat(targetElement.innerText) : parseInt(targetElement.innerText);
     const formattedUnit = unitString ? " " + unitString : "";
     
     liveElement.innerText = liveValue + formattedUnit;
 
     if (!isNaN(targetNum) && liveValue < targetNum) {
-        // Below target threshold -> trigger red warning style
         liveElement.className = "lacking-nutrient";
     } else {
-        // Normal or above target -> clear warning style
         liveElement.className = "";
     }
 }
 
 function updateDashboard() {
-    // Shared Ambient Infrastructure Sensors
+    // Environmental Readouts
     setElementText("reservoirLevel", random(75, 98) + "%");
     setElementText("mixingLevel", random(45, 85) + "%");
     setElementText("flowRate", random(4, 8) + " L/min");
@@ -223,12 +217,12 @@ function updateDashboard() {
     checkNutrientDeficiency(ecC, "targetECC", "soilECC", "mS/cm", true);
     checkNutrientDeficiency(moistC, "targetMoistureC", "soilC", "%");
     
-    // Power Profiles
+    // Infrastructure power
     setElementText("batteryLevel", random(82, 100) + "%");
     setElementText("voltage", (Math.random() * 1 + 12).toFixed(1) + "V");
     setElementText("powerSource", Math.random() > 0.3 ? "Solar PV Matrix" : "Battery Storage");
 
-    // Global Telemetry Status evaluation
+    // Indicator logic
     const systemN = (nA + nB + nC) / 3;
     const systemK = (kA + kB + kC) / 3;
     const nutrientIndicator = document.getElementById("nutrientSystemIndicator");
@@ -282,7 +276,7 @@ if (emergencyStop) {
     });
 }
 
-// System Execution Startup Initialization Loops
+// Initialization hooks
 setInterval(updateDashboard, 2000);
 ["A", "B", "C"].forEach(zone => syncZoneProfile(zone));
 updateDashboard();
