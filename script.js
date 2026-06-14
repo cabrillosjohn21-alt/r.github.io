@@ -92,7 +92,7 @@ if (themeToggleBtn) {
 }
 
 /* ==========================
-   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE INSTANCES - COMPATIBILITY FIX)
+   POLYCULTURE CONTROLLER MODULE (TRIPLE ZONE MATRIX UPDATER)
 ========================== */
 function syncZoneProfile(zoneId) {
     const cropSelect = document.getElementById(`cropSelect${zoneId}`);
@@ -103,7 +103,7 @@ function syncZoneProfile(zoneId) {
     const crop = cropSelect.value.toLowerCase().trim();
     const availableStages = Object.keys(cropDatabase[crop]);
 
-    // Step 1: Manage available stages dynamically per zone
+    // Step 1: Manage available stages dynamically per zone container
     Array.from(growthStage.options).forEach(option => {
         if (availableStages.includes(option.value)) {
             option.disabled = false;
@@ -117,7 +117,7 @@ function syncZoneProfile(zoneId) {
         }
     });
 
-    // Step 2: Render unique target fields safely into card dashboard matrix
+    // Step 2: Render unique target fields safely into card dashboard matrices
     const activeStage = growthStage.value;
     const data = cropDatabase[crop][activeStage];
 
