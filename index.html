@@ -73,7 +73,7 @@
                     <h3 style="margin: 0; color: var(--accent-color); font-size: 1.2rem;">📍 SOIL ZONE A (Precise Node 01)</h3>
                     <div style="display: flex; gap: 15px;">
                         <div>
-                            <select id="cropSelectA" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                            <select id="cropSelectA">
                                 <option value="pechay">Pechay (Native Cabbage)</option>
                                 <option value="kangkong">Kangkong (Water Spinach)</option>
                                 <option value="sitaw">Sitaw (String Beans)</option>
@@ -87,7 +87,7 @@
                             </select>
                         </div>
                         <div>
-                            <select id="growthStageA" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                            <select id="growthStageA">
                                 <option value="seedling">Seedling</option>
                                 <option value="vegetative" selected>Vegetative</option>
                                 <option value="flowering">Flowering</option>
@@ -97,13 +97,20 @@
                     </div>
                 </div>
 
-                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
-                    <div class="card" style="background: var(--bg-primary);"><h3>Moisture (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="soilA">--</span> / <span id="targetMoistureA" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Nitrogen (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="nitrogenA" style="color: var(--text-main);">--</span> / <span id="targetNA" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Phosphorus (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="phosphorusA" style="color: var(--text-main);">--</span> / <span id="targetPA" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Potassium (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="potassiumA" style="color: var(--text-main);">--</span> / <span id="targetKA" style="color: var(--text-muted);">--</span></p></div>
+                <div style="margin-bottom: 15px; font-weight: 600; font-size: 0.9rem; color: var(--accent-color);">📈 Current Sensor Telemetry vs Target Profiles:</div>
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target N</h3><p id="targetNA" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target P</h3><p id="targetPA" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target K</h3><p id="targetKA" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target pH</h3><p id="targetPHA" style="font-size: 1.4rem; color: var(--success);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target EC</h3><p id="targetECA" style="font-size: 1.4rem; color: var(--warning);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target Moisture</h3><p id="targetMoistureA" style="font-size: 1.4rem; color: var(--text-main);">--</p></div>
                 </div>
-                <div id="recommendationBoxA" class="alert-box" style="margin-top: 15px; font-size: 0.85rem; padding: 12px 20px;">Synchronizing Profile...</div>
+                
+                <div style="margin-top: 15px; margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted);">
+                    <b>Live Sensor Readings for Zone A:</b> Moisture: <span id="soilA" style="color:var(--text-main); font-weight:bold;">--</span> | N: <span id="nitrogenA" style="color:var(--text-main); font-weight:bold;">--</span> | P: <span id="phosphorusA" style="color:var(--text-main); font-weight:bold;">--</span> | K: <span id="potassiumA" style="color:var(--text-main); font-weight:bold;">--</span>
+                </div>
+                <div id="recommendationBoxA" class="alert-box" style="margin-top: 10px; font-size: 0.85rem; padding: 12px 20px;">Synchronizing Profile...</div>
             </div>
 
             <div class="zone-block" style="border-left: 5px solid var(--success); background: var(--bg-secondary); padding: 25px; border-radius: 0 12px 12px 0; margin-bottom: 35px; box-shadow: var(--card-shadow);">
@@ -111,7 +118,7 @@
                     <h3 style="margin: 0; color: var(--success); font-size: 1.2rem;">📍 SOIL ZONE B (Precise Node 02)</h3>
                     <div style="display: flex; gap: 15px;">
                         <div>
-                            <select id="cropSelectB" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                            <select id="cropSelectB">
                                 <option value="pechay" selected>Pechay (Native Cabbage)</option>
                                 <option value="kangkong">Kangkong (Water Spinach)</option>
                                 <option value="sitaw">Sitaw (String Beans)</option>
@@ -125,7 +132,7 @@
                             </select>
                         </div>
                         <div>
-                            <select id="growthStageB" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                            <select id="growthStageB">
                                 <option value="seedling">Seedling</option>
                                 <option value="vegetative" selected>Vegetative</option>
                                 <option value="flowering">Flowering</option>
@@ -135,13 +142,20 @@
                     </div>
                 </div>
 
-                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
-                    <div class="card" style="background: var(--bg-primary);"><h3>Moisture (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="soilB">--</span> / <span id="targetMoistureB" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Nitrogen (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="nitrogenB" style="color: var(--text-main);">--</span> / <span id="targetNB" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Phosphorus (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="phosphorusB" style="color: var(--text-main);">--</span> / <span id="targetPB" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Potassium (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="potassiumB" style="color: var(--text-main);">--</span> / <span id="targetKB" style="color: var(--text-muted);">--</span></p></div>
+                <div style="margin-bottom: 15px; font-weight: 600; font-size: 0.9rem; color: var(--success);">📈 Current Sensor Telemetry vs Target Profiles:</div>
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target N</h3><p id="targetNB" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target P</h3><p id="targetPB" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target K</h3><p id="targetKB" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target pH</h3><p id="targetPHB" style="font-size: 1.4rem; color: var(--success);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target EC</h3><p id="targetECB" style="font-size: 1.4rem; color: var(--warning);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target Moisture</h3><p id="targetMoistureB" style="font-size: 1.4rem; color: var(--text-main);">--</p></div>
                 </div>
-                <div id="recommendationBoxB" class="alert-box" style="margin-top: 15px; font-size: 0.85rem; padding: 12px 20px; border-left-color: var(--success)">Synchronizing Profile...</div>
+                
+                <div style="margin-top: 15px; margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted);">
+                    <b>Live Sensor Readings for Zone B:</b> Moisture: <span id="soilB" style="color:var(--text-main); font-weight:bold;">--</span> | N: <span id="nitrogenB" style="color:var(--text-main); font-weight:bold;">--</span> | P: <span id="phosphorusB" style="color:var(--text-main); font-weight:bold;">--</span> | K: <span id="potassiumB" style="color:var(--text-main); font-weight:bold;">--</span>
+                </div>
+                <div id="recommendationBoxB" class="alert-box" style="margin-top: 10px; font-size: 0.85rem; padding: 12px 20px; border-left-color: var(--success)">Synchronizing Profile...</div>
             </div>
 
             <div class="zone-block" style="border-left: 5px solid var(--warning); background: var(--bg-secondary); padding: 25px; border-radius: 0 12px 12px 0; margin-bottom: 35px; box-shadow: var(--card-shadow);">
@@ -149,7 +163,7 @@
                     <h3 style="margin: 0; color: var(--warning); font-size: 1.2rem;">📍 SOIL ZONE C (Precise Node 03)</h3>
                     <div style="display: flex; gap: 15px;">
                         <div>
-                            <select id="cropSelectC" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                            <select id="cropSelectC">
                                 <option value="pechay">Pechay (Native Cabbage)</option>
                                 <option value="kangkong">Kangkong (Water Spinach)</option>
                                 <option value="sitaw">Sitaw (String Beans)</option>
@@ -163,7 +177,7 @@
                             </select>
                         </div>
                         <div>
-                            <select id="growthStageC" style="padding: 8px 30px 8px 12px; font-size: 0.85rem;">
+                            <select id="growthStageC">
                                 <option value="seedling">Seedling</option>
                                 <option value="vegetative">Vegetative</option>
                                 <option value="flowering">Flowering</option>
@@ -173,13 +187,20 @@
                     </div>
                 </div>
 
-                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
-                    <div class="card" style="background: var(--bg-primary);"><h3>Moisture (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="soilC">--</span> / <span id="targetMoistureC" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Nitrogen (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="nitrogenC" style="color: var(--text-main);">--</span> / <span id="targetNC" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Phosphorus (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="phosphorusC" style="color: var(--text-main);">--</span> / <span id="targetPC" style="color: var(--text-muted);">--</span></p></div>
-                    <div class="card" style="background: var(--bg-primary);"><h3>Potassium (Live / Target)</h3><p style="font-size: 1.4rem;"><span id="potassiumC" style="color: var(--text-main);">--</span> / <span id="targetKC" style="color: var(--text-muted);">--</span></p></div>
+                <div style="margin-bottom: 15px; font-weight: 600; font-size: 0.9rem; color: var(--warning);">📈 Current Sensor Telemetry vs Target Profiles:</div>
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target N</h3><p id="targetNC" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target P</h3><p id="targetPC" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target K</h3><p id="targetKC" style="font-size: 1.4rem; color: var(--accent-color);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target pH</h3><p id="targetPHC" style="font-size: 1.4rem; color: var(--success);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target EC</h3><p id="targetECC" style="font-size: 1.4rem; color: var(--warning);">--</p></div>
+                    <div class="card" style="background: var(--bg-primary);"><h3>Target Moisture</h3><p id="targetMoistureC" style="font-size: 1.4rem; color: var(--text-main);">--</p></div>
                 </div>
-                <div id="recommendationBoxC" class="alert-box" style="margin-top: 15px; font-size: 0.85rem; padding: 12px 20px; border-left-color: var(--warning)">Synchronizing Profile...</div>
+                
+                <div style="margin-top: 15px; margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted);">
+                    <b>Live Sensor Readings for Zone C:</b> Moisture: <span id="soilC" style="color:var(--text-main); font-weight:bold;">--</span> | N: <span id="nitrogenC" style="color:var(--text-main); font-weight:bold;">--</span> | P: <span id="phosphorusC" style="color:var(--text-main); font-weight:bold;">--</span> | K: <span id="potassiumC" style="color:var(--text-main); font-weight:bold;">--</span>
+                </div>
+                <div id="recommendationBoxC" class="alert-box" style="margin-top: 10px; font-size: 0.85rem; padding: 12px 20px; border-left-color: var(--warning)">Synchronizing Profile...</div>
             </div>
         </section>
 
