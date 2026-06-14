@@ -5,7 +5,7 @@ function random(min, max) {
 }
 
 /* ==========================
-   CROP DATABASE
+   CROP DATABASE (2 Primary Plants with NPK Focus)
 ========================== */
 const cropDatabase = {
     tomato: {
@@ -17,17 +17,6 @@ const cropDatabase = {
     lettuce: {
         seedling: { n: 80, p: 40, k: 120, ph: "5.5 - 6.5", ec: "0.8 - 1.2", moisture: "70%" },
         vegetative: { n: 150, p: 50, k: 200, ph: "5.5 - 6.5", ec: "1.2 - 1.8", moisture: "75%" }
-    },
-    spinach: {
-        vegetative: { n: 180, p: 50, k: 220, ph: "6.0 - 7.0", ec: "1.8 - 2.3", moisture: "75%" }
-    },
-    eggplant: {
-        vegetative: { n: 180, p: 60, k: 200, ph: "5.8 - 6.5", ec: "2.0 - 2.5", moisture: "70%" },
-        fruiting: { n: 170, p: 70, k: 280, ph: "5.8 - 6.5", ec: "2.5 - 3.2", moisture: "75%" }
-    },
-    cucumber: {
-        vegetative: { n: 180, p: 50, k: 220, ph: "5.5 - 6.5", ec: "1.8 - 2.5", moisture: "75%" },
-        fruiting: { n: 170, p: 60, k: 260, ph: "5.5 - 6.5", ec: "2.0 - 3.0", moisture: "80%" }
     }
 };
 
@@ -99,13 +88,13 @@ function updateCropPreset() {
 
     if (recommendationBox) {
         recommendationBox.innerHTML = `
-            Recommended for <b>${crop.toUpperCase()}</b> (${stage})<br><br>
-            Nitrogen: ${data.n} ppm<br>
-            Phosphorus: ${data.p} ppm<br>
-            Potassium: ${data.k} ppm<br>
-            pH Range: ${data.ph}<br>
-            EC Range: ${data.ec}<br>
-            Moisture Setpoint: ${data.moisture}
+            Recommended Health Targets for <b>${crop.toUpperCase()}</b> (${stage})<br><br>
+            <strong>Primary Nutrients Needed:</strong><br>
+            • Nitrogen (N): ${data.n} ppm<br>
+            • Phosphorus (P): ${data.p} ppm<br>
+            • Potassium (K): ${data.k} ppm<br><br>
+            <strong>Environment:</strong><br>
+            • pH Range: ${data.ph} | EC Range: ${data.ec} | Moisture: ${data.moisture}
         `;
     }
 }
@@ -116,7 +105,7 @@ if (cropSelectEl) cropSelectEl.addEventListener("change", updateCropPreset);
 if (growthStageEl) growthStageEl.addEventListener("change", updateCropPreset);
 
 /* ==========================
-   DASHBOARD LIVE DATA
+   DASHBOARD LIVE DATA & INDICATORS
 ========================== */
 function setElementText(id, value) {
     const el = document.getElementById(id);
@@ -124,6 +113,11 @@ function setElementText(id, value) {
 }
 
 function updateDashboard() {
+    // Generate sensor data values
+    const currentN = random(100, 250);
+    const currentP = random(50, 150);
+    const currentK = random(100, 300);
+
     setElementText("reservoirLevel", random(50, 100) + "%");
     setElementText("mixingLevel", random(30, 90) + "%");
     setElementText("flowRate", random(2, 10) + " L/min");
@@ -133,9 +127,12 @@ function updateDashboard() {
     setElementText("soilA", random(40, 90) + "%");
     setElementText("soilB", random(40, 90) + "%");
     setElementText("soilC", random(40, 90) + "%");
-    setElementText("nitrogen", random(100, 250) + " ppm");
-    setElementText("phosphorus", random(50, 150) + " ppm");
-    setElementText("potassium", random(100, 300) + " ppm");
+    
+    // NPK live values
+    setElementText("nitrogen", currentN + " ppm");
+    setElementText("phosphorus", currentP + " ppm");
+    setElementText("potassium", currentK + " ppm");
+    
     setElementText("phLevel", (Math.random() * 2 + 5.5).toFixed(2));
     setElementText("ecLevel", (Math.random() * 2 + 1).toFixed(2) + " mS/cm");
     setElementText("batteryLevel", random(40, 100) + "%");
@@ -143,6 +140,40 @@ function updateDashboard() {
     setElementText("current", random(1, 10) + "A");
     setElementText("powerDraw", random(50, 500) + "W");
     setElementText("powerSource", Math.random() > 0.5 ? "Solar" : "Battery");
+
+    // Dynamic Updates for the 2 Running Indicators
+    updateRunningIndicators(currentN, currentP, currentK);
+}
+
+function updateRunningIndicators(n, p, k) {
+    const nutrientIndicator = document.getElementById("nutrientSystemIndicator");
+    const sensorIndicator = document.getElementById("sensorArrayIndicator");
+    const systemState = document.getElementById("systemState");
+
+    if (systemState && systemState.innerText === "EMERGENCY") return;
+
+    // Indicator 1: Nutrient Feed Health check (Checks if NPK variables look stable)
+    if (nutrientIndicator) {
+        if (n < 110 || k < 120) {
+            nutrientIndicator.innerText = "DOSING REQUIRED";
+            nutrientIndicator.className = "device-status warning-status";
+        } else {
+            nutrientIndicator.innerText = "BALANCED";
+            nutrientIndicator.className = "device-status active";
+        }
+    }
+
+    // Indicator 2: Sensor Array Connectivity status 
+    if (sensorIndicator) {
+        // Simulates intermittent data telemetry health validation
+        if (Math.random() > 0.95) {
+            sensorIndicator.innerText = "LAG/POLLING";
+            sensorIndicator.className = "device-status warning-status";
+        } else {
+            sensorIndicator.innerText = "SAMPLING LIVE";
+            sensorIndicator.className = "device-status active";
+        }
+    }
 }
 
 /* ==========================
@@ -163,7 +194,6 @@ function toggleDeviceState(elementId) {
     }
 }
 
-// Event Bindings with structural safeguards
 const transferPumpBtn = document.getElementById("transferPumpBtn");
 const boosterPumpBtn = document.getElementById("boosterPumpBtn");
 const nutrientPumpBtn = document.getElementById("nutrientPumpBtn");
@@ -186,6 +216,12 @@ if (emergencyStop) {
             stateLabel.innerText = "EMERGENCY";
             stateLabel.className = "device-status danger"; 
         }
+
+        // Shut down running dashboard state metrics
+        const nutrientIndicator = document.getElementById("nutrientSystemIndicator");
+        const sensorIndicator = document.getElementById("sensorArrayIndicator");
+        if (nutrientIndicator) { nutrientIndicator.innerText = "SHUTDOWN"; nutrientIndicator.className = "device-status danger"; }
+        if (sensorIndicator) { sensorIndicator.innerText = "OFFLINE"; sensorIndicator.className = "device-status danger"; }
         
         const transferPumpStatus = document.getElementById("transferPumpStatus");
         const boosterPumpStatus = document.getElementById("boosterPumpStatus");
