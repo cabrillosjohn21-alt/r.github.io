@@ -147,20 +147,42 @@ function syncZoneProfile(zoneId) {
 ["A", "B", "C"].forEach(zone => {
     const cSel = document.getElementById(`cropSelect${zone}`);
     const gSel = document.getElementById(`growthStage${zone}`);
-    if (cSel) cSel.addEventListener("change", () => syncZoneProfile(zone));
-    if (gSel) gSel.addEventListener("change", () => syncZoneProfile(zone));
+    if (cSel) cSel.addEventListener("change", () => { syncZoneProfile(zone); updateDashboard(); });
+    if (gSel) gSel.addEventListener("change", () => { syncZoneProfile(zone); updateDashboard(); });
 });
 
 /* ==========================
-   DASHBOARD TELEMETRY LOOP
+   DASHBOARD TELEMETRY LOOP WITH DEFICIENCY CHECKER (NEW WORK)
 ========================== */
 function setElementText(id, value) {
     const el = document.getElementById(id);
     if (el) el.innerText = value;
 }
 
+// Compares live numerical text vs target presets and injects red flashing alerts
+function checkNutrientDeficiency(liveValue, targetElementId, liveDisplayElementId, unitString) {
+    const targetElement = document.getElementById(targetElementId);
+    const liveElement = document.getElementById(liveDisplayElementId);
+    
+    if (!targetElement || !liveElement) return;
+
+    // Convert target text configuration into an integer (e.g. "140 ppm" -> 140)
+    const targetNum = parseInt(targetElement.innerText);
+    
+    // Set standard readout string text
+    liveElement.innerText = liveValue + " " + unitString;
+
+    if (!isNaN(targetNum) && liveValue < targetNum) {
+        // Condition matches deficiency trigger: throw CSS warning rules
+        liveElement.className = "lacking-nutrient";
+    } else {
+        // Safe readout parameters
+        liveElement.className = "";
+    }
+}
+
 function updateDashboard() {
-    // Environmental Sensors
+    // Environmental Infrastructure Readings
     setElementText("reservoirLevel", random(75, 98) + "%");
     setElementText("mixingLevel", random(45, 85) + "%");
     setElementText("flowRate", random(4, 8) + " L/min");
@@ -170,25 +192,31 @@ function updateDashboard() {
     setElementText("phLevel", (Math.random() * 0.8 + 6.0).toFixed(2));
     setElementText("ecLevel", (Math.random() * 0.6 + 1.4).toFixed(2) + " mS/cm");
 
-    // Dynamic Zone Node Telemetry Readings
-    const nA = random(130, 195); const pA = random(45, 65); const kA = random(200, 260);
+    // Dynamic Live Node Telemetry Readings (Ranges allow testing both normal and alert states)
+    const nA = random(60, 180);  const pA = random(30, 60);  const kA = random(95, 250);
     setElementText("soilA", random(68, 74) + "%");
-    setElementText("nitrogenA", nA + " ppm"); setElementText("phosphorusA", pA + " ppm"); setElementText("potassiumA", kA + " ppm");
+    checkNutrientDeficiency(nA, "targetNA", "nitrogenA", "ppm");
+    checkNutrientDeficiency(pA, "targetPA", "phosphorusA", "ppm");
+    checkNutrientDeficiency(kA, "targetKA", "potassiumA", "ppm");
 
-    const nB = random(65, 95); const pB = random(30, 45); const kB = random(100, 135);
+    const nB = random(60, 180);  const pB = random(30, 60);  const kB = random(95, 250);
     setElementText("soilB", random(72, 82) + "%");
-    setElementText("nitrogenB", nB + " ppm"); setElementText("phosphorusB", pB + " ppm"); setElementText("potassiumB", kB + " ppm");
+    checkNutrientDeficiency(nB, "targetNB", "nitrogenB", "ppm");
+    checkNutrientDeficiency(pB, "targetPB", "phosphorusB", "ppm");
+    checkNutrientDeficiency(kB, "targetKB", "potassiumB", "ppm");
 
-    const nC = random(145, 230); const pC = random(55, 85); const kC = random(240, 320);
+    const nC = random(60, 180);  const pC = random(30, 60);  const kC = random(95, 250);
     setElementText("soilC", random(76, 84) + "%");
-    setElementText("nitrogenC", nC + " ppm"); setElementText("phosphorusC", pC + " ppm"); setElementText("potassiumC", kC + " ppm");
+    checkNutrientDeficiency(nC, "targetNC", "nitrogenC", "ppm");
+    checkNutrientDeficiency(pC, "targetPC", "phosphorusC", "ppm");
+    checkNutrientDeficiency(kC, "targetKC", "potassiumC", "ppm");
     
-    // System Electrical Parameters
+    // Electrical parameters
     setElementText("batteryLevel", random(82, 100) + "%");
     setElementText("voltage", (Math.random() * 1 + 12).toFixed(1) + "V");
     setElementText("powerSource", Math.random() > 0.3 ? "Solar PV Matrix" : "Battery Storage");
 
-    // Evaluation Metric Logic
+    // System State Indicator evaluation rules
     const systemN = (nA + nB + nC) / 3;
     const systemK = (kA + kB + kC) / 3;
     
@@ -243,7 +271,7 @@ if (emergencyStop) {
     });
 }
 
-// System Startup Initialization Execution
+// System Execution Instantiation Hooks
 setInterval(updateDashboard, 2000);
-updateDashboard();
 ["A", "B", "C"].forEach(zone => syncZoneProfile(zone));
+updateDashboard();
