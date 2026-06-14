@@ -27,7 +27,7 @@ const cropDatabase = {
         flowering: { n: 160, p: 65, k: 260, ph: "5.8 - 6.5", ec: "2.2 - 2.8", moisture: "75%" },
         fruiting: { n: 140, p: 70, k: 300, ph: "5.8 - 6.5", ec: "2.4 - 3.2", moisture: "80%" }
     },
-    silingLabuyo: {
+    silinglabuyo: {
         seedling: { n: 90, p: 40, k: 110, ph: "5.8 - 6.2", ec: "1.0 - 1.5", moisture: "65%" },
         vegetative: { n: 170, p: 50, k: 210, ph: "5.8 - 6.5", ec: "1.8 - 2.4", moisture: "70%" },
         flowering: { n: 130, p: 65, k: 250, ph: "5.8 - 6.5", ec: "2.0 - 2.8", moisture: "75%" },
@@ -88,44 +88,45 @@ function updateToggleText(theme) {
 }
 
 /* ==========================
-   CROP PRESET LOGIC & STAGE DISABLER
+   CROP PRESET LOGIC & STAGE SYNC
 ========================== */
 function adjustAvailableStages() {
     const cropSelect = document.getElementById("cropSelect");
     const growthStage = document.getElementById("growthStage");
     
-    if (!cropSelect || !growthStage) return;
+    if (!cropSelect || !growthStage || !cropSelect.value) return;
     
-    const crop = cropSelect.value;
+    const crop = cropSelect.value.toLowerCase().trim();
+    if (!cropDatabase[crop]) return;
+    
     const availableStages = Object.keys(cropDatabase[crop]);
     
-    // Check options inside the dropdown list
     Array.from(growthStage.options).forEach(option => {
-        if (availableStages.includes(option.value)) {
+        const optionVal = option.value.toLowerCase().trim();
+        if (availableStages.includes(optionVal)) {
             option.disabled = false;
             option.style.opacity = "1";
         } else {
             option.disabled = true;
-            option.style.opacity = "0.3"; // Dim disabled options visually
+            option.style.opacity = "0.3"; 
             
-            // If the user was on "Flowering" but switched to Pechay, reset select down to "Vegetative"
-            if (growthStage.value === option.value) {
-                growthStage.value = "vegetative";
+            if (growthStage.value.toLowerCase().trim() === optionVal) {
+                growthStage.value = availableStages[0]; 
             }
         }
     });
 }
 
 function updateCropPreset() {
-    adjustAvailableStages(); // Sync dropdown elements first
+    adjustAvailableStages();
     
     const cropSelect = document.getElementById("cropSelect");
     const growthStage = document.getElementById("growthStage");
     
     if (!cropSelect || !growthStage) return;
 
-    const crop = cropSelect.value;
-    const stage = growthStage.value;
+    const crop = cropSelect.value.toLowerCase().trim();
+    const stage = growthStage.value.toLowerCase().trim();
 
     const targetN = document.getElementById("targetN");
     const targetP = document.getElementById("targetP");
@@ -137,23 +138,26 @@ function updateCropPreset() {
 
     const data = cropDatabase[crop][stage];
 
-    if (!data) return;
+    if (!data) {
+        const targets = [targetN, targetP, targetK, targetPH, targetEC, targetMoisture];
+        targets.forEach(el => { if (el) el.innerText = "N/A"; });
+        return;
+    }
 
     if (targetN) targetN.innerText = data.n + " ppm";
     if (targetP) targetP.innerText = data.p + " ppm";
     if (targetK) targetK.innerText = data.k + " ppm";
     if (targetPH) targetPH.innerText = data.ph;
-    if (targetEC) targetEC.innerText = data.ec;
+    if (targetEC) targetEC.innerText = data.ec + " mS/cm";
     if (targetMoisture) targetMoisture.innerText = data.moisture;
 
     if (recommendationBox) {
-        // Format names nicely for local display context
         const readableCropNames = {
             pechay: "Pechay (Native Leafy Cabbage)",
             kangkong: "Kangkong (Water Spinach)",
             sitaw: "Sitaw (String Beans)",
             talong: "Talong (Eggplant)",
-            silingLabuyo: "Siling Labuyo (Native Chili)",
+            silinglabuyo: "Siling Labuyo (Native Chili)",
             kamatis: "Kamatis (Tomato)",
             ampalaya: "Ampalaya (Bitter Gourd)",
             kalamansi: "Kalamansi (Local Lime)",
@@ -175,8 +179,13 @@ function updateCropPreset() {
 
 const cropSelectEl = document.getElementById("cropSelect");
 const growthStageEl = document.getElementById("growthStage");
-if (cropSelectEl) cropSelectEl.addEventListener("change", updateCropPreset);
-if (growthStageEl) growthStageEl.addEventListener("change", updateCropPreset);
+
+if (cropSelectEl) {
+    cropSelectEl.addEventListener("change", updateCropPreset);
+}
+if (growthStageEl) {
+    growthStageEl.addEventListener("change", updateCropPreset);
+}
 
 /* ==========================
    DASHBOARD LIVE DATA & INDICATORS
@@ -194,8 +203,8 @@ function updateDashboard() {
     setElementText("reservoirLevel", random(50, 100) + "%");
     setElementText("mixingLevel", random(30, 90) + "%");
     setElementText("flowRate", random(2, 10) + " L/min");
-    setElementText("temperature", random(25, 33) + "°C"); // Calibrated for PH greenhouse environments
-    setElementText("humidity", random(60, 95) + "%");     // Matches local humidity thresholds
+    setElementText("temperature", random(25, 33) + "°C"); 
+    setElementText("humidity", random(60, 95) + "%");     
     setElementText("lightLevel", random(500, 3000) + " lux");
     setElementText("soilA", random(40, 90) + "%");
     setElementText("soilB", random(40, 90) + "%");
@@ -245,7 +254,7 @@ function updateRunningIndicators(n, p, k) {
 }
 
 /* ==========================
-   HARDWARE MANIPULATION OVERRIDES
+   HARDWARE ACTUATOR OVERRIDES
 ========================== */
 function toggleDeviceState(elementId) {
     const el = document.getElementById(elementId);
@@ -298,7 +307,7 @@ if (emergencyStop) {
     });
 }
 
-// Initial Loops
+// Initial System Ignition Execution
 setInterval(updateDashboard, 2000);
 updateDashboard();
 updateCropPreset();
