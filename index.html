@@ -12,8 +12,9 @@
         <h2>HydroGrow Pro</h2>
         <ul>
             <li><a href="#dashboard">📊 System Telemetry</a></li>
+            <li><a href="#hydraulics">⚙️ Actuators & Valves</a></li>
             <li><a href="#zone-management">🌱 Zone Management</a></li>
-            <li><a href="#controls">🎛️ Actuator Diagnostics</a></li>
+            <li><a href="#controls">🎛️ Diagnostics Panel</a></li>
         </ul>
         
         <div class="system-status">
@@ -31,7 +32,7 @@
     <div class="main-content">
         
         <div class="topbar">
-            <h1>Precision Agronomy Node</h1>
+            <h1>Precision Agronomy Node v2.0</h1>
             <div style="display: flex; align-items: center; gap: 15px;">
                 <button id="theme-toggle">☀️ Light</button>
                 <div class="connection-status">
@@ -62,11 +63,59 @@
 
         <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 40px;">
 
+        <section id="hydraulics">
+            <h2>System Actuation & Hydraulics Matrix</h2>
+            <div class="card-grid">
+                <div class="card rpm-card">
+                    <h3>Mixer Motor Speed</h3>
+                    <p id="mixerRPM" class="rpm-display">0 RPM</p>
+                    <div class="rpm-bar-container"><div id="mixerRPMBar" class="rpm-bar" style="width: 0%"></div></div>
+                </div>
+                <div class="card rpm-card">
+                    <h3>Transfer Pump Speed</h3>
+                    <p id="transferRPM" class="rpm-display">0 RPM</p>
+                    <div class="rpm-bar-container"><div id="transferRPMBar" class="rpm-bar" style="width: 0%"></div></div>
+                </div>
+                <div class="card rpm-card">
+                    <h3>Booster Pump Speed</h3>
+                    <p id="boosterRPM" class="rpm-display">0 RPM</p>
+                    <div class="rpm-bar-container"><div id="boosterRPMBar" class="rpm-bar" style="width: 0%"></div></div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 1rem; margin: 20px 0 10px 0; color: var(--text-muted); text-transform: uppercase;">Core Distribution Infrastructure Valves</h3>
+            <div class="card-grid valve-grid">
+                <div class="card valve-card" id="valveCard-V1">
+                    <div class="valve-icon">🚰</div>
+                    <div>
+                        <h4>Main Water Inlet [V1]</h4>
+                        <span id="valveStatus-V1" class="valve-badge closed">CLOSED</span>
+                    </div>
+                </div>
+                <div class="card valve-card" id="valveCard-V2">
+                    <div class="valve-icon">🧪</div>
+                    <div>
+                        <h4>Nutrient Intake Line [V2]</h4>
+                        <span id="valveStatus-V2" class="valve-badge closed">CLOSED</span>
+                    </div>
+                </div>
+                <div class="card valve-card" id="valveCard-V3">
+                    <div class="valve-icon">🔄</div>
+                    <div>
+                        <h4>Tank Recycle Valve [V3]</h4>
+                        <span id="valveStatus-V3" class="valve-badge closed">CLOSED</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 40px;">
+
         <section id="zone-management">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
                 <h2>Dynamic Soil Zone Management Arrays</h2>
                 <div class="zone-action-controls">
-                    <input type="text" id="newZoneName" placeholder="e.g., Zone D, Greenhouse 1" style="padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main); font-weight: 600;">
+                    <input type="text" id="newZoneName" placeholder="e.g., Zone D" style="padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main); font-weight: 600;">
                     <button id="addZoneBtn" style="background-color: var(--accent-color); color: white; border: none; padding: 10px 20px;">➕ Add Custom Zone</button>
                 </div>
             </div>
