@@ -62,21 +62,22 @@ const cropDatabase = {
 };
 
 const readableCropNames = {
-    pechay: "Pechay (Native Leafy Cabbage)", kangkong: "Kangkong (Water Spinach)",
-    sitaw: "Sitaw (String Beans)", talong: "Talong (Eggplant)",
-    silinglabuyo: "Siling Labuyo (Chili)", kamatis: "Kamatis (Tomato)",
-    ampalaya: "Ampalaya (Bitter Gourd)", kalamansi: "Kalamansi (Philippine Lime)",
-    strawberry: "Strawberry (Benguet Variety)", basil: "Basil (Local Cultivar)"
+    pechay: "Pechay", kangkong: "Kangkong", sitaw: "Sitaw", talong: "Talong",
+    silinglabuyo: "Siling Labuyo", kamatis: "Kamatis", ampalaya: "Ampalaya",
+    kalamansi: "Kalamansi", strawberry: "Strawberry", basil: "Basil"
 };
 
 /* ==========================================================================
-   DYNAMIC PLUGGABLE TRACKER ARRAY
+   DYNAMIC TRACKER STATE CONTAINER
    ========================================================================== */
 let activeZones = [
     { id: "A", name: "SOIL ZONE A (Precise Node 01)", defaultCrop: "talong", defaultStage: "vegetative" },
     { id: "B", name: "SOIL ZONE B (Precise Node 02)", defaultCrop: "pechay", defaultStage: "vegetative" },
     { id: "C", name: "SOIL ZONE C (Precise Node 03)", defaultCrop: "kamatis", defaultStage: "fruiting" }
 ];
+
+// Structural hardware switch hooks
+let globalPumpsActive = { transfer: false, booster: false, mixer: false };
 
 const container = document.getElementById("dynamic-zones-container");
 
@@ -94,16 +95,16 @@ function renderZonesUI() {
                 <h3>📍 ${zone.name}</h3>
                 <div class="zone-selectors">
                     <select id="cropSelect${zone.id}" onchange="syncZoneProfile('${zone.id}')">
-                        <option value="pechay" ${zone.defaultCrop==='pechay'?'selected':''}>Pechay (Native Cabbage)</option>
-                        <option value="kangkong" ${zone.defaultCrop==='kangkong'?'selected':''}>Kangkong (Water Spinach)</option>
-                        <option value="sitaw" ${zone.defaultCrop==='sitaw'?'selected':''}>Sitaw (String Beans)</option>
-                        <option value="talong" ${zone.defaultCrop==='talong'?'selected':''}>Talong (Eggplant)</option>
-                        <option value="silinglabuyo" ${zone.defaultCrop==='silinglabuyo'?'selected':''}>Siling Labuyo (Chili)</option>
-                        <option value="kamatis" ${zone.defaultCrop==='kamatis'?'selected':''}>Kamatis (Tomato)</option>
-                        <option value="ampalaya" ${zone.defaultCrop==='ampalaya'?'selected':''}>Ampalaya (Bitter Gourd)</option>
-                        <option value="kalamansi" ${zone.defaultCrop==='kalamansi'?'selected':''}>Kalamansi (Philippine Lime)</option>
-                        <option value="strawberry" ${zone.defaultCrop==='strawberry'?'selected':''}>Strawberry (Benguet)</option>
-                        <option value="basil" ${zone.defaultCrop==='basil'?'selected':''}>Basil (Local Cultivar)</option>
+                        <option value="pechay" ${zone.defaultCrop==='pechay'?'selected':''}>Pechay</option>
+                        <option value="kangkong" ${zone.defaultCrop==='kangkong'?'selected':''}>Kangkong</option>
+                        <option value="sitaw" ${zone.defaultCrop==='sitaw'?'selected':''}>Sitaw</option>
+                        <option value="talong" ${zone.defaultCrop==='talong'?'selected':''}>Talong</option>
+                        <option value="silinglabuyo" ${zone.defaultCrop==='silinglabuyo'?'selected':''}>Siling Labuyo</option>
+                        <option value="kamatis" ${zone.defaultCrop==='kamatis'?'selected':''}>Kamatis</option>
+                        <option value="ampalaya" ${zone.defaultCrop==='ampalaya'?'selected':''}>Ampalaya</option>
+                        <option value="kalamansi" ${zone.defaultCrop==='kalamansi'?'selected':''}>Kalamansi</option>
+                        <option value="strawberry" ${zone.defaultCrop==='strawberry'?'selected':''}>Strawberry</option>
+                        <option value="basil" ${zone.defaultCrop==='basil'?'selected':''}>Basil</option>
                     </select>
                     <select id="growthStage${zone.id}" onchange="syncZoneProfile('${zone.id}')">
                         <option value="seedling" ${zone.defaultStage==='seedling'?'selected':''}>Seedling</option>
@@ -111,123 +112,72 @@ function renderZonesUI() {
                         <option value="flowering" ${zone.defaultStage==='flowering'?'selected':''}>Flowering</option>
                         <option value="fruiting" ${zone.defaultStage==='fruiting'?'selected':''}>Fruiting</option>
                     </select>
-                    <button class="delete-zone-btn" onclick="deleteZone('${zone.id}')">🗑️ Delete</button>
+                    <button class="delete-zone-btn" onclick="deleteZone('${zone.id}')">🗑️ Remove</button>
                 </div>
             </div>
 
             <div class="card-grid matrix-grid">
-                <div class="card matrix-card">
-                    <h3>Nitrogen (N)</h3>
-                    <div class="comparison-values">
-                        <div><span class="val-label">LIVE</span><p id="nitrogen${zone.id}">--</p></div>
-                        <div class="divider-line"></div>
-                        <div><span class="val-label">TARGET</span><p id="targetN${zone.id}" class="target-val">--</p></div>
-                    </div>
-                </div>
-                <div class="card matrix-card">
-                    <h3>Phosphorus (P)</h3>
-                    <div class="comparison-values">
-                        <div><span class="val-label">LIVE</span><p id="phosphorus${zone.id}">--</p></div>
-                        <div class="divider-line"></div>
-                        <div><span class="val-label">TARGET</span><p id="targetP${zone.id}" class="target-val">--</p></div>
-                    </div>
-                </div>
-                <div class="card matrix-card">
-                    <h3>Potassium (K)</h3>
-                    <div class="comparison-values">
-                        <div><span class="val-label">LIVE</span><p id="potassium${zone.id}">--</p></div>
-                        <div class="divider-line"></div>
-                        <div><span class="val-label">TARGET</span><p id="targetK${zone.id}" class="target-val">--</p></div>
-                    </div>
-                </div>
-                <div class="card matrix-card">
-                    <h3>Soil pH</h3>
-                    <div class="comparison-values">
-                        <div><span class="val-label">LIVE</span><p id="soilPH${zone.id}">--</p></div>
-                        <div class="divider-line"></div>
-                        <div><span class="val-label">TARGET</span><p id="targetPH${zone.id}" class="target-val">--</p></div>
-                    </div>
-                </div>
-                <div class="card matrix-card">
-                    <h3>Soil EC</h3>
-                    <div class="comparison-values">
-                        <div><span class="val-label">LIVE</span><p id="soilEC${zone.id}">--</p></div>
-                        <div class="divider-line"></div>
-                        <div><span class="val-label">TARGET</span><p id="targetEC${zone.id}" class="target-val">--</p></div>
-                    </div>
-                </div>
-                <div class="card matrix-card">
-                    <h3>Moisture</h3>
-                    <div class="comparison-values">
-                        <div><span class="val-label">LIVE</span><p id="soil${zone.id}">--</p></div>
-                        <div class="divider-line"></div>
-                        <div><span class="val-label">TARGET</span><p id="targetMoisture${zone.id}" class="target-val">--</p></div>
+                <div class="card matrix-card"><h3>Nitrogen</h3><div class="comparison-values"><div><span class="val-label">LIVE</span><p id="nitrogen${zone.id}">--</p></div><div class="divider-line"></div><div><span class="val-label">TARGET</span><p id="targetN${zone.id}" class="target-val">--</p></div></div></div>
+                <div class="card matrix-card"><h3>Phosphorus</h3><div class="comparison-values"><div><span class="val-label">LIVE</span><p id="phosphorus${zone.id}">--</p></div><div class="divider-line"></div><div><span class="val-label">TARGET</span><p id="targetP${zone.id}" class="target-val">--</p></div></div></div>
+                <div class="card matrix-card"><h3>Potassium</h3><div class="comparison-values"><div><span class="val-label">LIVE</span><p id="potassium${zone.id}">--</p></div><div class="divider-line"></div><div><span class="val-label">TARGET</span><p id="targetK${zone.id}" class="target-val">--</p></div></div></div>
+                <div class="card matrix-card"><h3>Soil pH</h3><div class="comparison-values"><div><span class="val-label">LIVE</span><p id="soilPH${zone.id}">--</p></div><div class="divider-line"></div><div><span class="val-label">TARGET</span><p id="targetPH${zone.id}" class="target-val">--</p></div></div></div>
+                <div class="card matrix-card"><h3>Soil EC</h3><div class="comparison-values"><div><span class="val-label">LIVE</span><p id="soilEC${zone.id}">--</p></div><div class="divider-line"></div><div><span class="val-label">TARGET</span><p id="targetEC${zone.id}" class="target-val">--</p></div></div></div>
+                <div class="card matrix-card"><h3>Moisture</h3><div class="comparison-values"><div><span class="val-label">LIVE</span><p id="soil${zone.id}">--</p></div><div class="divider-line"></div><div><span class="val-label">TARGET</span><p id="targetMoisture${zone.id}" class="target-val">--</p></div></div></div>
+            </div>
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div id="recommendationBox${zone.id}" class="alert-box" style="flex:1; margin-top:0;">Synchronizing...</div>
+                
+                <div class="zone-valve-strip">
+                    <div class="sub-valve-indicator">
+                        <span>🚪 Distribution Solenoid [SV-${zone.id}]:</span>
+                        <b id="solenoidState-${zone.id}" style="color:var(--danger)">CLOSED</b>
                     </div>
                 </div>
             </div>
-            
-            <div id="recommendationBox${zone.id}" class="alert-box">Synchronizing...</div>
         `;
         container.appendChild(block);
         syncZoneProfile(zone.id);
     });
 }
 
-/* ==========================
-   ADD & REMOVE ENGINE HANDLERS
-========================== */
+/* ==========================================================================
+   DOM OPERATIONS & ZONE SELECTION PERSISTENCE
+   ========================================================================== */
 document.getElementById("addZoneBtn").addEventListener("click", () => {
     const inputField = document.getElementById("newZoneName");
     const nameText = inputField.value.trim();
-    
-    if (nameText === "") {
-        alert("Please enter a valid label name for the new tracking zone.");
-        return;
-    }
+    if (nameText === "") return alert("Please enter a valid label name.");
 
-    const uniqueId = "Z" + Date.now(); // Generate clean tracking timestamp hash id
-    activeZones.push({
-        id: uniqueId,
-        name: nameText.toUpperCase(),
-        defaultCrop: "pechay",
-        defaultStage: "seedling"
-    });
-
+    const uniqueId = "Z" + Date.now().toString().slice(-4); 
+    activeZones.push({ id: uniqueId, name: nameText.toUpperCase(), defaultCrop: "pechay", defaultStage: "seedling" });
     inputField.value = "";
     renderZonesUI();
     updateDashboard();
 });
 
 function deleteZone(zoneId) {
-    if(confirm("Are you sure you want to remove this monitoring zone setup?")) {
+    if(confirm("Remove this configuration matrix?")) {
         activeZones = activeZones.filter(z => z.id !== zoneId);
         renderZonesUI();
         updateDashboard();
     }
 }
 
-/* ==========================
-   DYNAMIC CALIBRATION PROFILE SYNC
-========================== */
 function syncZoneProfile(zoneId) {
     const cropSelect = document.getElementById(`cropSelect${zoneId}`);
     const growthStage = document.getElementById(`growthStage${zoneId}`);
-    
     if (!cropSelect || !growthStage) return;
 
     const crop = cropSelect.value;
     const availableStages = Object.keys(cropDatabase[crop]);
 
-    Array.from(growthStage.options).forEach(option => {
-        if (availableStages.includes(option.value)) {
-            option.disabled = false;
-            option.style.opacity = "1";
+    Array.from(growthStage.options).forEach(opt => {
+        if (availableStages.includes(opt.value)) {
+            opt.disabled = false; opt.style.opacity = "1";
         } else {
-            option.disabled = true;
-            option.style.opacity = "0.25";
-            if (growthStage.value === option.value) {
-                growthStage.value = availableStages[0];
-            }
+            opt.disabled = true; opt.style.opacity = "0.25";
+            if (growthStage.value === opt.value) growthStage.value = availableStages[0];
         }
     });
 
@@ -242,51 +192,73 @@ function syncZoneProfile(zoneId) {
         setElementText(`targetEC${zoneId}`, data.ec + " mS/cm");
         setElementText(`targetMoisture${zoneId}`, data.moisture);
 
-        const recommendationBox = document.getElementById(`recommendationBox${zoneId}`);
-        if (recommendationBox) {
-            recommendationBox.innerHTML = `🎯 <b>${readableCropNames[crop]} [${activeStage.toUpperCase()}] Targets:</b> NPK: ${data.n}-${data.p}-${data.k} | pH: ${data.ph} | EC: ${data.ec} mS/cm`;
-        }
+        const recBox = document.getElementById(`recommendationBox${zoneId}`);
+        if (recBox) recBox.innerHTML = `🎯 <b>${readableCropNames[crop]} Targets:</b> NPK: ${data.n}-${data.p}-${data.k} | pH: ${data.ph}`;
         
-        // Save current user selection back into global array persistence
         const zoneObj = activeZones.find(z => z.id === zoneId);
-        if (zoneObj) {
-            zoneObj.defaultCrop = crop;
-            zoneObj.defaultStage = activeStage;
-        }
+        if (zoneObj) { zoneObj.defaultCrop = crop; zoneObj.defaultStage = activeStage; }
     }
 }
 
-/* ==========================
-   DIAGNOSTIC TELEMETRY INTERRUPT
-========================== */
 function setElementText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.innerText = value;
+    const el = document.getElementById(id); if (el) el.innerText = value;
+}
+
+/* ==========================================================================
+   DYNAMIC INDUSTRIAL SIMULATION LOOP (RPM / VALVES / NUTRIENTS)
+   ========================================================================== */
+function updateValveCardUI(valveId, isOpen) {
+    const card = document.getElementById(`valveCard-${valveId}`);
+    const badge = document.getElementById(`valveStatus-${valveId}`);
+    if(!card || !badge) return;
+
+    if(isOpen) {
+        card.classList.add('valve-open');
+        badge.innerText = "OPEN"; badge.className = "valve-badge open";
+    } else {
+        card.classList.remove('valve-open');
+        badge.innerText = "CLOSED"; badge.className = "valve-badge closed";
+    }
+}
+
+function updateRPMGauge(displayId, barId, targetRPM, isActive) {
+    const display = document.getElementById(displayId);
+    const bar = document.getElementById(barId);
+    if(!display || !bar) return;
+
+    let currentRPM = 0;
+    if(isActive) {
+        // Add minor operational variance to the reading
+        currentRPM = targetRPM + random(-25, 25);
+    }
+    
+    display.innerText = `${currentRPM} RPM`;
+    let percent = (currentRPM / 3600) * 100; // Calibrated against a 3600 max speed limit
+    bar.style.width = `${Math.min(percent, 100)}%`;
 }
 
 function checkNutrientDeficiency(liveValue, targetElementId, liveDisplayElementId, unitString, isFloat = false) {
     const targetElement = document.getElementById(targetElementId);
     const liveElement = document.getElementById(liveDisplayElementId);
-    
-    if (!targetElement || !liveElement) return;
+    if (!targetElement || !liveElement) return false;
 
     const targetNum = isFloat ? parseFloat(targetElement.innerText) : parseInt(targetElement.innerText);
-    const formattedUnit = unitString ? " " + unitString : "";
-    
-    liveElement.innerText = liveValue + formattedUnit;
+    liveElement.innerText = liveValue + (unitString ? " " + unitString : "");
 
     if (!isNaN(targetNum) && liveValue < targetNum) {
         liveElement.className = "lacking-nutrient";
+        return true; // Deficiency discovered
     } else {
         liveElement.className = "";
+        return false;
     }
 }
 
 function updateDashboard() {
-    // Environmental Infrastructure Telemetry
+    // Environmental Infrastructure
     setElementText("reservoirLevel", random(75, 98) + "%");
     setElementText("mixingLevel", random(45, 85) + "%");
-    setElementText("flowRate", random(4, 8) + " L/min");
+    setElementText("flowRate", (globalPumpsActive.booster || globalPumpsActive.transfer ? (random(50, 75)/10).toFixed(1) : "0.0") + " L/min");
     setElementText("temperature", random(26, 31) + "°C"); 
     setElementText("humidity", random(70, 92) + "%");     
     setElementText("lightLevel", random(1200, 2800) + " lux");
@@ -296,33 +268,51 @@ function updateDashboard() {
     setElementText("voltage", (Math.random() * 1 + 12).toFixed(1) + "V");
     setElementText("powerSource", Math.random() > 0.3 ? "Solar PV Matrix" : "Battery Storage");
 
-    // Dynamic Engine Multi-Zone Checker Loop
+    // Dynamic SCADA System Infrastructure Processing
+    updateRPMGauge("mixerRPM", "mixerRPMBar", 1200, globalPumpsActive.mixer);
+    updateRPMGauge("transferRPM", "transferRPMBar", 2400, globalPumpsActive.transfer);
+    updateRPMGauge("boosterRPM", "boosterRPMBar", 3100, globalPumpsActive.booster);
+
+    // Sync structural flow distribution rules
+    updateValveCardUI("V1", globalPumpsActive.transfer);
+    updateValveCardUI("V2", globalPumpsActive.mixer);
+    updateValveCardUI("V3", globalPumpsActive.mixer && !globalPumpsActive.booster);
+
+    // Dynamic Engine Multi-Zone Analytics Loop
     activeZones.forEach(zone => {
-        const nLive = random(60, 180);  
-        const pLive = random(30, 60);  
-        const kLive = random(95, 250);
+        // Generate live context markers
+        const nLive = random(60, 180);  const pLive = random(30, 60);  const kLive = random(95, 250);
         const phLive = parseFloat((Math.random() * 1.2 + 5.5).toFixed(1));
         const ecLive = parseFloat((Math.random() * 1.0 + 0.8).toFixed(1));
-        const moistLive = random(55, 85);
+        const moistLive = random(45, 85);
 
-        checkNutrientDeficiency(nLive, `targetN${zone.id}`, `nitrogen${zone.id}`, "ppm");
-        checkNutrientDeficiency(pLive, `targetP${zone.id}`, `phosphorus${zone.id}`, "ppm");
-        checkNutrientDeficiency(kLive, `targetK${zone.id}`, `potassium${zone.id}`, "ppm");
-        checkNutrientDeficiency(phLive, `targetPH${zone.id}`, `soilPH${zone.id}`, "", true);
-        checkNutrientDeficiency(ecLive, `targetEC${zone.id}`, `soilEC${zone.id}`, "mS/cm", true);
-        checkNutrientDeficiency(moistLive, `targetMoisture${zone.id}`, `soil${zone.id}`, "%");
+        let nDeficit = checkNutrientDeficiency(nLive, `targetN${zone.id}`, `nitrogen${zone.id}`, "ppm");
+        let pDeficit = checkNutrientDeficiency(pLive, `targetP${zone.id}`, `phosphorus${zone.id}`, "ppm");
+        let kDeficit = checkNutrientDeficiency(kLive, `targetK${zone.id}`, `potassium${zone.id}`, "ppm");
+        let phDeficit = checkNutrientDeficiency(phLive, `targetPH${zone.id}`, `soilPH${zone.id}`, "", true);
+        let ecDeficit = checkNutrientDeficiency(ecLive, `targetEC${zone.id}`, `soilEC${zone.id}`, "mS/cm", true);
+        let mDeficit = checkNutrientDeficiency(moistLive, `targetMoisture${zone.id}`, `soil${zone.id}`, "%");
+
+        // Logic Mapping: If soil moisture or nutrients are low and booster is pumping, open local solenoid!
+        const solenoidIndicator = document.getElementById(`solenoidState-${zone.id}`);
+        if(solenoidIndicator) {
+            if((mDeficit || nDeficit || kDeficit) && globalPumpsActive.booster) {
+                solenoidIndicator.innerText = "OPEN"; solenoidIndicator.style.color = "var(--success)";
+            } else {
+                solenoidIndicator.innerText = "CLOSED"; solenoidIndicator.style.color = "var(--danger)";
+            }
+        }
     });
 }
 
-/* ==========================
-   THEME TOGGLE SETUP
-========================== */
+/* ==========================================================================
+   MANUAL ACTUATOR DIAGNOSTICS & THEME CONFIGS
+   ========================================================================== */
 const themeToggleBtn = document.getElementById('theme-toggle');
 if (themeToggleBtn) {
     const currentTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', currentTheme);
     themeToggleBtn.textContent = currentTheme === 'dark' ? '☀️ Light' : '🌙 Dark';
-
     themeToggleBtn.addEventListener('click', () => {
         let theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
@@ -331,39 +321,44 @@ if (themeToggleBtn) {
     });
 }
 
-/* ==========================
-   ACTUATOR CONTROLLER HANDLERS
-========================== */
-function toggleDeviceState(elementId) {
+function toggleDeviceState(elementId, pumpKey) {
     const el = document.getElementById(elementId);
-    if (el) {
-        if (el.classList.contains('off')) {
-            el.classList.remove('off'); el.classList.add('on'); el.innerText = 'ON';
-        } else {
-            el.classList.remove('on'); el.classList.add('off'); el.innerText = 'OFF';
-        }
+    if (!el) return;
+    if (el.classList.contains('off')) {
+        el.className = "device-status active"; el.innerText = 'ON';
+        globalPumpsActive[pumpKey] = true;
+    } else {
+        el.className = "device-status off"; el.innerText = 'OFF';
+        globalPumpsActive[pumpKey] = false;
     }
+    updateDashboard();
 }
 
-if (document.getElementById("transferPumpBtn")) document.getElementById("transferPumpBtn").addEventListener("click", () => toggleDeviceState("transferPumpStatus"));
-if (document.getElementById("boosterPumpBtn")) document.getElementById("boosterPumpBtn").addEventListener("click", () => toggleDeviceState("boosterPumpStatus"));
-if (document.getElementById("nutrientPumpBtn")) document.getElementById("nutrientPumpBtn").addEventListener("click", () => alert("Precision dosage loop injected manually."));
-if (document.getElementById("valveBtn")) document.getElementById("valveBtn").addEventListener("click", () => alert("Solenoid distribution valves toggled."));
-if (document.getElementById("mixerBtn")) document.getElementById("mixerBtn").addEventListener("click", () => alert("Tank agitator run loop completed."));
+if (document.getElementById("transferPumpBtn")) document.getElementById("transferPumpBtn").addEventListener("click", () => toggleDeviceState("transferPumpStatus", "transfer"));
+if (document.getElementById("boosterPumpBtn")) document.getElementById("boosterPumpBtn").addEventListener("click", () => toggleDeviceState("boosterPumpStatus", "booster"));
+if (document.getElementById("mixerBtn")) {
+    document.getElementById("mixerBtn").addEventListener("click", () => {
+        globalPumpsActive.mixer = !globalPumpsActive.mixer;
+        alert(globalPumpsActive.mixer ? "Agitator sequence initialized." : "Agitator sequence deactivated.");
+        updateDashboard();
+    });
+}
+if (document.getElementById("nutrientPumpBtn")) document.getElementById("nutrientPumpBtn").addEventListener("click", () => alert("Precision dosing injection executed."));
+if (document.getElementById("valveBtn")) document.getElementById("valveBtn").addEventListener("click", () => alert("Cycling distribution network manually..."));
 
 if (document.getElementById("emergencyStop")) {
     document.getElementById("emergencyStop").addEventListener("click", () => {
-        alert("EMERGENCY STOP ENGAGED");
-        document.getElementById("systemState").innerText = "EMERGENCY";
-        document.getElementById("systemState").className = "device-status danger"; 
-        document.getElementById("nutrientSystemIndicator").innerText = "SHUTDOWN";
-        document.getElementById("nutrientSystemIndicator").className = "device-status danger";
-        document.getElementById("sensorArrayIndicator").innerText = "OFFLINE";
-        document.getElementById("sensorArrayIndicator").className = "device-status danger";
+        alert("EMERGENCY SYSTEM STOP ENGAGED");
+        globalPumpsActive = { transfer: false, booster: false, mixer: false };
+        document.getElementById("systemState").className = "device-status danger"; document.getElementById("systemState").innerText = "EMERGENCY";
+        document.getElementById("nutrientSystemIndicator").className = "device-status danger"; document.getElementById("nutrientSystemIndicator").innerText = "SHUTDOWN";
+        document.getElementById("sensorArrayIndicator").className = "device-status danger"; document.getElementById("sensorArrayIndicator").innerText = "OFFLINE";
+        document.querySelectorAll('.device-status:not(#systemState):not(#nutrientSystemIndicator):not(#sensorArrayIndicator)').forEach(el => { el.className = "device-status off"; el.innerText = "OFF"; });
+        updateDashboard();
     });
 }
 
-// System Init Engine Hooks
+// Initialization Hooks
 renderZonesUI();
 setInterval(updateDashboard, 2000);
 updateDashboard();
